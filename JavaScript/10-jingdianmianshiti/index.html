@@ -59,7 +59,7 @@
 <meta property="og:site_name" content="飞舟实验室">
 <meta property="og:description" content="第一题、以下输出结果是什么？1var name &#x3D; &amp;apos;window name&amp;apos;;2(function () &amp;#123;3  if (typeof name &#x3D;&#x3D;&#x3D; &amp;apos;undefined&amp;apos;) &amp;#123;4    var name &#x3D; &amp;apos;Fay Chou&amp;apos;;5    console.log(name);6  &amp;#125; else &amp;#123;7    console.log(&amp;apos;Hello&amp;apos;);8">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-28T16:41:33.307Z">
+<meta property="og:updated_time" content="2019-11-29T03:01:53.885Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.faychou.cn/JavaScript/10-jingdianmianshiti/">
@@ -250,7 +250,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 00:41:33" itemprop="dateModified" datetime="2019-11-29T00:41:33+08:00">2019-11-29</time>
+                <time title="修改时间：2019-11-29 11:01:53" itemprop="dateModified" datetime="2019-11-29T11:01:53+08:00">2019-11-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,7 +294,8 @@
 <p>解析：这道题主要考察的还是变量提升，通过关键字 <code>var</code> 声明的变量，会被提升至当前作用域的顶部，也就是第4行代码 name 的声明会升至当前函数的顶部，但是赋值的位置不变。</p>
 <h3 id="第二题、思考以下代码会在控制台打印出什么？"><a href="#第二题、思考以下代码会在控制台打印出什么？" class="headerlink" title="第二题、思考以下代码会在控制台打印出什么？"></a>第二题、思考以下代码会在控制台打印出什么？</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> a = b = <span class="number">5</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;)();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 5</span></span></pre></td></tr></table></figure>
 
-<p>&lt;!-– more –-&gt;</p>
+<a id="more"></a>
+
 <p>解析：在函数的内部，有两个变量，其中变量 a 的前面加了关键字 <code>var</code> 进行声明，说明该变量是局部变量，但是变量 b 是没有加关键字的，即是全局变量，所以第二行代码实际上等价于 <code>var a = window.b = 5</code>。</p>
 <h3 id="第三题、以下代码的结果是什么？"><a href="#第三题、以下代码的结果是什么？" class="headerlink" title="第三题、以下代码的结果是什么？"></a>第三题、以下代码的结果是什么？</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window name'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  name: <span class="string">'Chou'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  child: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    name: <span class="string">'Fay Chou'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(person.child.getName()); <span class="comment">// Fay Chou</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test = person.child.getName;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(test()); <span class="comment">// window name</span></span></pre></td></tr></table></figure>
 
@@ -347,6 +348,11 @@
 
 
       <footer class="post-footer">
+        <div>
+          
+            
+          
+        </div>
           <div class="post-tags">
               <a href="/tags/js/" rel="tag"># js</a>
               <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag"># 面试题</a>
@@ -361,8 +367,8 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/uncategorized/hello-world/" rel="prev" title="Hello World">
-                  Hello World <i class="fa fa-chevron-right"></i>
+                <a href="/web/newblogbuildingsummary/" rel="prev" title="新博客的搭建">
+                  新博客的搭建 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -418,7 +424,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

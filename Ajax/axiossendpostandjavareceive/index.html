@@ -51,31 +51,32 @@
   };
 </script>
 
-  <meta name="description" content="分享web前端开发技术">
-<meta name="keywords" content="html,css,js,node,vue,react,javascript,angular,webpack,web,前端">
-<meta property="og:type" content="website">
-<meta property="og:title" content="飞舟实验室">
-<meta property="og:url" content="https:&#x2F;&#x2F;www.faychou.cn&#x2F;">
+  <meta name="description" content="场景描述：如果后端是 Java（springmvc），前端使用 jQuery 的 $.ajax 发送 POST 请求，测试接口是没问题的。但是换做使用 axios 来发送 POST 请求，后端却无法获取数据。 问题的主要原因是后端默认接收的 POST 请求头是 Content-Type 设置为 application&#x2F;x-www-form-urlencoded 的表单请求，参数形式是 key1&#x3D;v">
+<meta name="keywords" content="axios,vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="axios发送post请求java后端无法拿到数据">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.faychou.cn&#x2F;Ajax&#x2F;axiossendpostandjavareceive&#x2F;">
 <meta property="og:site_name" content="飞舟实验室">
-<meta property="og:description" content="分享web前端开发技术">
+<meta property="og:description" content="场景描述：如果后端是 Java（springmvc），前端使用 jQuery 的 $.ajax 发送 POST 请求，测试接口是没问题的。但是换做使用 axios 来发送 POST 请求，后端却无法获取数据。 问题的主要原因是后端默认接收的 POST 请求头是 Content-Type 设置为 application&#x2F;x-www-form-urlencoded 的表单请求，参数形式是 key1&#x3D;v">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-29T04:28:36.726Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://www.faychou.cn/">
+<link rel="canonical" href="https://www.faychou.cn/Ajax/axiossendpostandjavareceive/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>飞舟实验室</title>
+  <title>axios发送post请求java后端无法拿到数据 | 飞舟实验室</title>
   
 
 
@@ -215,10 +216,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/Ajax/axiossendpostandjavareceive/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -232,8 +233,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/Ajax/axiossendpostandjavareceive/" class="post-title-link" itemprop="url">axios发送post请求java后端无法拿到数据</a>
+          axios发送post请求java后端无法拿到数据
         </h1>
 
         <div class="post-meta">
@@ -266,6 +266,13 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span class="leancloud-visitors-count"></span>
             </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -276,7 +283,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="场景描述："><a href="#场景描述：" class="headerlink" title="场景描述："></a>场景描述：</h3><p>如果后端是 Java（springmvc），前端使用 jQuery 的 <code>$.ajax</code> 发送 POST 请求，测试接口是没问题的。但是换做使用 axios 来发送 POST 请求，后端却无法获取数据。</p>
+        <h3 id="场景描述："><a href="#场景描述：" class="headerlink" title="场景描述："></a>场景描述：</h3><p>如果后端是 Java（springmvc），前端使用 jQuery 的 <code>$.ajax</code> 发送 POST 请求，测试接口是没问题的。但是换做使用 axios 来发送 POST 请求，后端却无法获取数据。</p>
 <p>问题的主要原因是后端默认接收的 POST 请求头是 <code>Content-Type</code> 设置为 <code>application/x-www-form-urlencoded</code> 的表单请求，参数形式是 <code>key1=value1&amp;key2=value2</code> 这种形式，后端获取使用 <code>@RequestParam</code> 。jQuery 默认的就是这种请求方式，所以使用 <code>$.ajax</code> 发送请求没有问题。</p>
 <p>而如果发送 POST 请求时不指定请求头 Request Header，默认使用的 <code>Content-Type</code> 是 <code>text/plain;charset=UTF-8</code> 或者 <code>application/json</code> ，参数出现在 Request payload 块，其参数形式是标准的 Json 格式，所以后台还是使用 <code>@RequestParam</code> 就无法获取到参数，就需要改用 <code>@RequestBody</code> 获取。</p>
 <p>在 axios 中使用 POST 发送数据时，默认是直接把 Json 放到请求体中提交到后端的，属于上述的第二种方式。</p>
@@ -299,338 +306,65 @@
 <p>这样前端请求还是按照原来的写法直接给 data 传递对象即可，因为每次请求的时候都会自动转换参数形式。</p>
 <p>参考文章：<a href="https://blog.csdn.net/zjz_zzzz/article/details/82753472" target="_blank" rel="noopener">https://blog.csdn.net/zjz_zzzz/article/details/82753472</a></p>
 
-      
     </div>
 
     
     
     
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/reward/wechatpay.jpg" alt="飞舟 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/reward/alipay.jpg" alt="飞舟 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
       <footer class="post-footer">
-        <div class="content-item-read">
+        <div>
+          
+            
           
         </div>
-        <div></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/axios/" rel="tag"># axios</a>
+              <a href="/tags/vue/" rel="tag"># vue</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="飞舟">
-      <meta itemprop="description" content="分享web前端开发技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="飞舟实验室">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/" class="post-title-link" itemprop="url">vue 移动端适配及打包为 APP</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-24 17:11:44" itemprop="dateCreated datePublished" datetime="2019-11-24T17:11:44+08:00">2019-11-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 11:02:22" itemprop="dateModified" datetime="2019-11-29T11:02:22+08:00">2019-11-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">移动端</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/" class="post-meta-item leancloud_visitors" data-flag-title="vue 移动端适配及打包为 APP" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>在 小程序、RN、Flutter 大行其道的环境下，为什么今天还要给大家聊聊网页版的移动布局，只能说各有各的需求。</p>
-<p>我们都知道，移动端 web 网页布局最大的挑战就是适配各种手机，不止是因为手机尺寸不一，更因为手机设备有一个叫 dpr 的参数，提高了手机分辨率的情况下，也对程序的开发提出了更高的要求。</p>
-<p>目前主流的 UI 设计方案是针对 iphone6 的手机尺寸（375 * 667 像素），但是设计图大小会设计为 750 * 1334 像素，因为 dpr 为 2，不清楚的童鞋可以参考这篇文章 <a href=""></a>，里面讲的很详细。这就要求前端的同学根据 UI 的设计稿做到开发的程序能够适配不同的手机尺寸大小。由于目前的 vw 的兼容性还有待提升，于是就有了迂回的政策–使用 rem 单位，该单位是相对于根标签的字体大小的，只要根标签的字体大小发生改变，rem 的大小也会跟着一起改变，从而实现自适应不同的设备。具体实施方案，请看以下步骤（基于 vue/cli3 搭建的环境）：</p>
-<p>第一步、安装相关依赖模块；</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm i amfe-flexible --save // 适配方案，会自动根据设备去修改根标签字体大小</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">npm i postcss-pxtorem --save-dev     // 把 px 转换成对应的 rem</span></pre></td></tr></table></figure>
-
-<p>在项目根目录下找到 public 下的 index.html 文件，在 head 中相应位置添加以下代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, maximum-scale=1"</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<p>第二步、在 main.js 中引入 适配文件：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'amfe-flexible'</span></span></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/" rel="next" title="vue 移动端适配及打包为 APP">
+                  <i class="fa fa-chevron-left"></i> vue 移动端适配及打包为 APP
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="content-item-read">
-          
-        </div>
-        <div></div>
-      </footer>
-  </article>
-  
-  
-  
+            <span class="post-nav-divider"></span>
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/web/newblogbuildingsummary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="飞舟">
-      <meta itemprop="description" content="分享web前端开发技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="飞舟实验室">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/web/newblogbuildingsummary/" class="post-title-link" itemprop="url">新博客的搭建</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-22 19:25:14" itemprop="dateCreated datePublished" datetime="2019-11-22T19:25:14+08:00">2019-11-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 11:02:08" itemprop="dateModified" datetime="2019-11-29T11:02:08+08:00">2019-11-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/web/newblogbuildingsummary/" class="post-meta-item leancloud_visitors" data-flag-title="新博客的搭建" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown 解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h3 id="hexo-安装"><a href="#hexo-安装" class="headerlink" title="hexo 安装"></a>hexo 安装</h3><p>首先确保电脑已经安装了 nodejs 和 git，如果没有安装请先安装后再执行以下操作。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g <span class="comment"># 脚手架</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">hexo init myBlog <span class="comment"># 创建项目</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> myBlog <span class="comment"># 进入目录</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">npm install <span class="comment"># 安装依赖</span></span></pre></td></tr></table></figure>
-
-<h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">├── _config.yml  <span class="comment"># 网站的配置文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">├── package.json <span class="comment"># 应用程序的信息</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">├── scaffolds <span class="comment"># 通用的 markdown 模板</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">├── <span class="built_in">source</span> <span class="comment"># 存放用户资源的地方</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">|   ├── _drafts <span class="comment"># 草稿文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">|   └── _posts <span class="comment"># 发布的文章</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">└── themes <span class="comment"># 博客的模板</span></span></pre></td></tr></table></figure>
-
-<h3 id="使用主题"><a href="#使用主题" class="headerlink" title="使用主题"></a>使用主题</h3><p>hexo 有非常丰富的第三方主题，可以快速帮助我们搭建功能强大的博客网站：</p>
-<p>第一步、下载主题模板 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">点击这里获取主题模板</a>；</p>
-<p>第二步、将下载的模板解压到 themes 目录；</p>
-<p>第三步、修改根目录下的 <code>_config.yml</code> 文件：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">模板名字</span></span></pre></td></tr></table></figure>
-
-<h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h3><p>在终端运行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span></pre></td></tr></table></figure>
-
-<p>这样在根目录下的 <code>source/_posts</code> 目录下就会生成一个 <code>.md</code>  的文件了，然后就可以直接进行编辑。</p>
-<p>_或者直接在 <code>_posts</code> 目录下新建 markdown 文件编辑，在 <code>_drafts</code> 目录新建 markdown 文件，就是草稿。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="attr">layout:</span> <span class="string">post</span> <span class="string">或者</span> <span class="string">get</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">文章的标题，默认</span> <span class="string">filename</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="attr">date:</span> <span class="string">文件的创建日期，如：2018-08-31</span> <span class="number">17</span><span class="string">:54:54</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="attr">updated:</span> <span class="string">文件的修改日期</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="attr">comments:</span> <span class="string">是否开启评论,</span> <span class="literal">true</span> <span class="string">或者</span> <span class="literal">false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="attr">tags:</span> <span class="string">文章的标签</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="attr">categories:</span> <span class="string">文章分类</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">自定义</span> <span class="string">url</span> <span class="string">中的名字</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span></pre></td></tr></table></figure>
-
-<p>有时候我们需要截取一部分文章作为首页的摘要显示,可以在文章中添加分隔符号:</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/web/newblogbuildingsummary/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+            <div class="post-nav-prev post-nav-item">
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="content-item-read">
-          
-        </div>
-        <div></div>
+          </div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/JavaScript/10-jingdianmianshiti/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="飞舟">
-      <meta itemprop="description" content="分享web前端开发技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="飞舟实验室">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/JavaScript/10-jingdianmianshiti/" class="post-title-link" itemprop="url">10道经典面试题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-18 13:04:14" itemprop="dateCreated datePublished" datetime="2019-11-18T13:04:14+08:00">2019-11-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 11:01:53" itemprop="dateModified" datetime="2019-11-29T11:01:53+08:00">2019-11-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/JavaScript/10-jingdianmianshiti/" class="post-meta-item leancloud_visitors" data-flag-title="10道经典面试题" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="第一题、以下输出结果是什么？"><a href="#第一题、以下输出结果是什么？" class="headerlink" title="第一题、以下输出结果是什么？"></a>第一题、以下输出结果是什么？</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window name'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> name === <span class="string">'undefined'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> name = <span class="string">'Fay Chou'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(name);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Hello'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;)(); <span class="comment">// Fay Chou</span></span></pre></td></tr></table></figure>
-
-<p>解析：这道题主要考察的还是变量提升，通过关键字 <code>var</code> 声明的变量，会被提升至当前作用域的顶部，也就是第4行代码 name 的声明会升至当前函数的顶部，但是赋值的位置不变。</p>
-<h3 id="第二题、思考以下代码会在控制台打印出什么？"><a href="#第二题、思考以下代码会在控制台打印出什么？" class="headerlink" title="第二题、思考以下代码会在控制台打印出什么？"></a>第二题、思考以下代码会在控制台打印出什么？</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> a = b = <span class="number">5</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;)();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 5</span></span></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/JavaScript/10-jingdianmianshiti/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="content-item-read">
-          
-        </div>
-        <div></div>
-      </footer>
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -659,6 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景描述："><span class="nav-number">1.</span> <span class="nav-text">场景描述：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#后端解决方案"><span class="nav-number">1.1.</span> <span class="nav-text">后端解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端解决方案："><span class="nav-number">1.2.</span> <span class="nav-text">前端解决方案：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

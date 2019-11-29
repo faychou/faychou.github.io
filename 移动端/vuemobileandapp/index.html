@@ -59,7 +59,7 @@
 <meta property="og:site_name" content="飞舟实验室">
 <meta property="og:description" content="环境配置在 小程序、RN、Flutter 大行其道的环境下，为什么今天还要给大家聊聊网页版的移动布局，只能说各有各的需求。 我们都知道，移动端 web 网页布局最大的挑战就是适配各种手机，不止是因为手机尺寸不一，更因为手机设备有一个叫 dpr 的参数，提高了手机分辨率的情况下，也对程序的开发提出了更高的要求。 目前主流的 UI 设计方案是针对 iphone6 的手机尺寸（375 * 667 像素）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-28T16:48:43.606Z">
+<meta property="og:updated_time" content="2019-11-29T03:02:22.667Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.faychou.cn/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/">
@@ -250,7 +250,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 00:48:43" itemprop="dateModified" datetime="2019-11-29T00:48:43+08:00">2019-11-29</time>
+                <time title="修改时间：2019-11-29 11:02:22" itemprop="dateModified" datetime="2019-11-29T11:02:22+08:00">2019-11-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -301,7 +301,8 @@
 <p>第二步、在 main.js 中引入 适配文件：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'amfe-flexible'</span></span></pre></td></tr></table></figure>
 
-<p>&lt;!-– more –-&gt;</p>
+<a id="more"></a>
+
 <p>第三步、在项目根目录下创建 vue.config.js 配置文件:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">'autoprefixer'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pxtorem = <span class="built_in">require</span>(<span class="string">'postcss-pxtorem'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    css: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        loaderOptions: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">          css: &#123;&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">          postcss: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            plugins: [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">              autoprefixer(),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">              pxtorem(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                rootValue: <span class="number">75</span>, <span class="comment">// 基准值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                propList: [<span class="string">'*'</span>] <span class="comment">// 决定哪些属性值自动转换，如：propList: ['font', 'font-size', 'line-height', 'letter-spacing'],</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">              &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            ]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">          &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 <p>上方的 rootValue 是基准值，假如设计图给的宽度是 750，通常就会把 rootValue 设置为75，这样写样式时，可以直接按照设计图标注的宽高来 1:1 还原，如：设计图上图片大小为 300 像素，那我们在代码里也直接写 300px 。</p>
@@ -334,6 +335,11 @@
 
 
       <footer class="post-footer">
+        <div>
+          
+            
+          
+        </div>
           <div class="post-tags">
               <a href="/tags/vue/" rel="tag"># vue</a>
               <a href="/tags/app/" rel="tag"># app</a>
@@ -352,6 +358,9 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+                <a href="/Ajax/axiossendpostandjavareceive/" rel="prev" title="axios发送post请求java后端无法拿到数据">
+                  axios发送post请求java后端无法拿到数据 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
       </footer>
@@ -406,7 +415,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

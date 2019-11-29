@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>axios发送post请求java后端无法拿到数据</title>
+    <url>/Ajax/axiossendpostandjavareceive/</url>
+    <content><![CDATA[<h3 id="场景描述："><a href="#场景描述：" class="headerlink" title="场景描述："></a>场景描述：</h3><p>如果后端是 Java（springmvc），前端使用 jQuery 的 <code>$.ajax</code> 发送 POST 请求，测试接口是没问题的。但是换做使用 axios 来发送 POST 请求，后端却无法获取数据。</p>
+<p>问题的主要原因是后端默认接收的 POST 请求头是 <code>Content-Type</code> 设置为 <code>application/x-www-form-urlencoded</code> 的表单请求，参数形式是 <code>key1=value1&amp;key2=value2</code> 这种形式，后端获取使用 <code>@RequestParam</code> 。jQuery 默认的就是这种请求方式，所以使用 <code>$.ajax</code> 发送请求没有问题。</p>
+<p>而如果发送 POST 请求时不指定请求头 Request Header，默认使用的 <code>Content-Type</code> 是 <code>text/plain;charset=UTF-8</code> 或者 <code>application/json</code> ，参数出现在 Request payload 块，其参数形式是标准的 Json 格式，所以后台还是使用 <code>@RequestParam</code> 就无法获取到参数，就需要改用 <code>@RequestBody</code> 获取。</p>
+<p>在 axios 中使用 POST 发送数据时，默认是直接把 Json 放到请求体中提交到后端的，属于上述的第二种方式。</p>
+<h4 id="后端解决方案"><a href="#后端解决方案" class="headerlink" title="后端解决方案"></a>后端解决方案</h4><p>在请求参数使用 <code>@RequestBody</code> 注解替代 <code>@RequestParam</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/save"</span>,method=RequestMethod.POST)</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;String, String&gt; <span class="title">save</span><span class="params">(@RequestBody Student student)</span></span></span></pre></td></tr></table></figure>
+
+<h4 id="前端解决方案："><a href="#前端解决方案：" class="headerlink" title="前端解决方案："></a>前端解决方案：</h4><p>如果后台处理不了的话，其实这个问题前端同学完全可以自己解决的，其实就是设置请求头而已，以下给出三种方案：</p>
+<p>第一种解决方案、前端添加请求头信息，并重新封装请求参数：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> params = <span class="string">'username='</span> + <span class="keyword">this</span>.username + <span class="string">'&amp;userpass='</span> + <span class="keyword">this</span>.userpass</span></pre></td></tr><tr><td class="code"><pre><span class="line">axios(&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  url: <span class="string">'/api'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  method: <span class="string">'POST'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  headers: &#123; <span class="string">'content-type'</span>: <span class="string">'application/x-www-form-urlencoded'</span> &#125;,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  data: params</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<p>第二种解决方案、针对第一种方案手动拼接参数很麻烦：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> params = <span class="keyword">new</span> URLSearchParams()</span></pre></td></tr><tr><td class="code"><pre><span class="line">params.append(<span class="string">'username'</span>, <span class="keyword">this</span>.username)</span></pre></td></tr><tr><td class="code"><pre><span class="line">params.append(<span class="string">'userpass'</span>, <span class="keyword">this</span>.userpass)</span></pre></td></tr><tr><td class="code"><pre><span class="line">axios(&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  url: <span class="string">'/api'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  method: <span class="string">'POST'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  headers: &#123; <span class="string">'content-type'</span>: <span class="string">'application/x-www-form-urlencoded'</span> &#125;,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  data: params</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<p>第三种解决方案、利用内置 qs 模块序列化参数：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">'qs'</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> data = &#123; <span class="attr">username</span>: <span class="keyword">this</span>.username, <span class="attr">userpass</span>: <span class="keyword">this</span>.userpass &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">axios(&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  url: <span class="string">'/api'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  method: <span class="string">'POST'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  headers: &#123; <span class="string">'content-type'</span>: <span class="string">'application/x-www-form-urlencoded'</span> &#125;,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  data: qs.stringify(data)</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<p>当然最好的方式是直接二次封装 axios：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 对 axios 进行二次封装</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">'qs'</span> <span class="comment">// 引入 qs 模块，该模块不需要安装，用来序列化 post 类型的数据</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">// 添加一个新的 axios 的实例</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> http = axios.create(&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  baseURL: <span class="string">'/api'</span>, <span class="comment">// 统一设置请求地址前缀</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  timeout: <span class="number">6000</span>, <span class="comment">// 请求超时时间</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  withCredentials: <span class="literal">true</span>, <span class="comment">// 是否允许带 cookie </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">// 请求拦截，统一在这里处理 POST 数据或者请求时带上 token</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">http.interceptors.request.use(<span class="function"><span class="keyword">function</span> (<span class="params">config</span>) </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="keyword">if</span> (config.method === <span class="string">"post"</span>) &#123; <span class="comment">// 这一步主要取决于后端是否可以接受 json</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    config.headers = &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">      <span class="string">'Content-Type'</span>:<span class="string">'application/x-www-form-urlencoded'</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">// 参数序列化</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    config.data = qs.stringify(config.data);</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="comment">// 获取 token</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="keyword">const</span> token = sessionStorage.getItem(<span class="string">'token'</span>)</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="keyword">if</span>(token) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">// ...</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="keyword">return</span> config;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">// 响应拦截，处理错误， 如 token 不合法</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">http.interceptors.response.use(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="keyword">return</span> response;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> http</span></pre></td></tr></table></figure>
+
+<p>这样前端请求还是按照原来的写法直接给 data 传递对象即可，因为每次请求的时候都会自动转换参数形式。</p>
+<p>参考文章：<a href="https://blog.csdn.net/zjz_zzzz/article/details/82753472" target="_blank" rel="noopener">https://blog.csdn.net/zjz_zzzz/article/details/82753472</a></p>
+]]></content>
+      <categories>
+        <category>Ajax</category>
+      </categories>
+      <tags>
+        <tag>axios</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue 移动端适配及打包为 APP</title>
     <url>/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/</url>
     <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>在 小程序、RN、Flutter 大行其道的环境下，为什么今天还要给大家聊聊网页版的移动布局，只能说各有各的需求。</p>
@@ -15,7 +49,8 @@
 <p>第二步、在 main.js 中引入 适配文件：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'amfe-flexible'</span></span></pre></td></tr></table></figure>
 
-<p>&lt;!-– more –-&gt;</p>
+<a id="more"></a>
+
 <p>第三步、在项目根目录下创建 vue.config.js 配置文件:</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">'autoprefixer'</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> pxtorem = <span class="built_in">require</span>(<span class="string">'postcss-pxtorem'</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    css: &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        loaderOptions: &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">          css: &#123;&#125;,</span></pre></td></tr><tr><td class="code"><pre><span class="line">          postcss: &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">            plugins: [</span></pre></td></tr><tr><td class="code"><pre><span class="line">              autoprefixer(),</span></pre></td></tr><tr><td class="code"><pre><span class="line">              pxtorem(&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">                rootValue: <span class="number">75</span>, <span class="comment">// 基准值</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">                propList: [<span class="string">'*'</span>] <span class="comment">// 决定哪些属性值自动转换，如：propList: ['font', 'font-size', 'line-height', 'letter-spacing'],</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">              &#125;)</span></pre></td></tr><tr><td class="code"><pre><span class="line">            ]</span></pre></td></tr><tr><td class="code"><pre><span class="line">          &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 <p>上方的 rootValue 是基准值，假如设计图给的宽度是 750，通常就会把 rootValue 设置为75，这样写样式时，可以直接按照设计图标注的宽高来 1:1 还原，如：设计图上图片大小为 300 像素，那我们在代码里也直接写 300px 。</p>
@@ -37,10 +72,11 @@
 <h3 id="hexo-安装"><a href="#hexo-安装" class="headerlink" title="hexo 安装"></a>hexo 安装</h3><p>首先确保电脑已经安装了 nodejs 和 git，如果没有安装请先安装后再执行以下操作。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g <span class="comment"># 脚手架</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">hexo init myBlog <span class="comment"># 创建项目</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> myBlog <span class="comment"># 进入目录</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">npm install <span class="comment"># 安装依赖</span></span></pre></td></tr></table></figure>
 
-<h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">├── _config.yml  <span class="comment"># 网站的配置文件</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">├── package.json <span class="comment"># 应用程序的信息</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">├── scaffolds <span class="comment"># 一些通用的 markdown 模板</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">├── <span class="built_in">source</span> <span class="comment"># 存放用户资源的地方</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">|   ├── _drafts <span class="comment"># 草稿文件</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">|   └── _posts <span class="comment"># 发布的文章</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">└── themes <span class="comment"># 博客的模板</span></span></pre></td></tr></table></figure>
+<h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">├── _config.yml  <span class="comment"># 网站的配置文件</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">├── package.json <span class="comment"># 应用程序的信息</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">├── scaffolds <span class="comment"># 通用的 markdown 模板</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">├── <span class="built_in">source</span> <span class="comment"># 存放用户资源的地方</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">|   ├── _drafts <span class="comment"># 草稿文件</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">|   └── _posts <span class="comment"># 发布的文章</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">└── themes <span class="comment"># 博客的模板</span></span></pre></td></tr></table></figure>
 
-<h3 id="使用主题"><a href="#使用主题" class="headerlink" title="使用主题"></a>使用主题</h3><p>第一步、下载模板：</p>
-<p>第二步、将下载的模板解压到 themes 目录：</p>
+<h3 id="使用主题"><a href="#使用主题" class="headerlink" title="使用主题"></a>使用主题</h3><p>hexo 有非常丰富的第三方主题，可以快速帮助我们搭建功能强大的博客网站：</p>
+<p>第一步、下载主题模板 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">点击这里获取主题模板</a>；</p>
+<p>第二步、将下载的模板解压到 themes 目录；</p>
 <p>第三步、修改根目录下的 <code>_config.yml</code> 文件：</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">模板名字</span></span></pre></td></tr></table></figure>
 
@@ -49,18 +85,19 @@
 
 <p>这样在根目录下的 <code>source/_posts</code> 目录下就会生成一个 <code>.md</code>  的文件了，然后就可以直接进行编辑。</p>
 <p>_或者直接在 <code>_posts</code> 目录下新建 markdown 文件编辑，在 <code>_drafts</code> 目录新建 markdown 文件，就是草稿。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">layout:</span> <span class="string">post或者get</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">文章的标题，默认</span> <span class="string">filename</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">date:</span> <span class="string">文件的创建日期，如：2018-08-31</span> <span class="number">17</span><span class="string">:54:54</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">updated:</span> <span class="string">文件的修改日期</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">comments:</span> <span class="string">是否开启评论,</span> <span class="literal">true</span> <span class="string">或者</span> <span class="literal">false</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">tags:</span> <span class="string">文章的标签，如：</span>	<span class="string">[tag1,</span> <span class="string">tag2,</span> <span class="string">tag3]</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">categories:</span> <span class="string">文章分类，如：</span>	<span class="string">[Android,</span> <span class="string">动画]</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">url</span> <span class="string">中的名字</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">layout:</span> <span class="string">post</span> <span class="string">或者</span> <span class="string">get</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">文章的标题，默认</span> <span class="string">filename</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">date:</span> <span class="string">文件的创建日期，如：2018-08-31</span> <span class="number">17</span><span class="string">:54:54</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">updated:</span> <span class="string">文件的修改日期</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">comments:</span> <span class="string">是否开启评论,</span> <span class="literal">true</span> <span class="string">或者</span> <span class="literal">false</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">tags:</span> <span class="string">文章的标签</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">categories:</span> <span class="string">文章分类</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">自定义</span> <span class="string">url</span> <span class="string">中的名字</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span></pre></td></tr></table></figure>
 
 <p>有时候我们需要截取一部分文章作为首页的摘要显示,可以在文章中添加分隔符号:</p>
-<p>&lt;!-– more –-&gt;</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">!-–</span> <span class="attr">more</span> –<span class="attr">-</span>&gt;</span></span></span></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!-- more --&gt;</span></span></span></pre></td></tr></table></figure>
 
 <p>发表草稿：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo publish [layout] &lt;filename&gt;</span></pre></td></tr></table></figure>
 
 <h3 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成静态文件并监视文件变动</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">hexo generate -w</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment"># 或者 启动服务器。默认情况下，访问网址为： http://localhost:4000/。</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">hexo server</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment"># 调试模式</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">hexo s --debug</span></pre></td></tr></table></figure>
 
-<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p>先安装git插件：</p>
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p>先安装 git 插件：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span></pre></td></tr></table></figure>
 
 <p>配置 git ，修改根目录下的 <code>_config.yml</code> 文件:</p>
@@ -178,61 +215,6 @@
       </tags>
   </entry>
   <entry>
-    <title>编写文章</title>
-    <url>/html/%E7%BC%96%E5%86%99%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new [layout] &lt;title&gt;</span></pre></td></tr></table></figure>
-
-<p>新建一篇文章。如果没有设置 <code>layout</code> 的话，默认使用 <a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">_config.yml</a> 中的 <code>default_layout</code> 参数代替。如果标题包含空格的话，请使用引号括起来。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"post title with whitespace"</span></span></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>-p</code>, <code>--path</code></td>
-<td align="left">自定义新文章的路径</td>
-</tr>
-<tr>
-<td align="left"><code>-r</code>, <code>--replace</code></td>
-<td align="left">如果存在同名文章，将其替换</td>
-</tr>
-<tr>
-<td align="left"><code>-s</code>, <code>--slug</code></td>
-<td align="left">文章的 Slug，作为新文章的文件名和发布后的 URL</td>
-</tr>
-</tbody></table>
-<p>默认情况下，Hexo 会使用文章的标题来决定文章文件的路径。对于独立页面来说，Hexo 会创建一个以标题为名字的目录，并在目录中放置一个 <code>index.md</code> 文件。你可以使用 <code>--path</code> 参数来覆盖上述行为、自行决定文件的目录：</p>
-]]></content>
-      <categories>
-        <category>html</category>
-      </categories>
-      <tags>
-        <tag>html</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/uncategorized/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>10道经典面试题</title>
     <url>/JavaScript/10-jingdianmianshiti/</url>
     <content><![CDATA[<h3 id="第一题、以下输出结果是什么？"><a href="#第一题、以下输出结果是什么？" class="headerlink" title="第一题、以下输出结果是什么？"></a>第一题、以下输出结果是什么？</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window name'</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> name === <span class="string">'undefined'</span>) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">var</span> name = <span class="string">'Fay Chou'</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(name);</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Hello'</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;)(); <span class="comment">// Fay Chou</span></span></pre></td></tr></table></figure>
@@ -240,7 +222,8 @@
 <p>解析：这道题主要考察的还是变量提升，通过关键字 <code>var</code> 声明的变量，会被提升至当前作用域的顶部，也就是第4行代码 name 的声明会升至当前函数的顶部，但是赋值的位置不变。</p>
 <h3 id="第二题、思考以下代码会在控制台打印出什么？"><a href="#第二题、思考以下代码会在控制台打印出什么？" class="headerlink" title="第二题、思考以下代码会在控制台打印出什么？"></a>第二题、思考以下代码会在控制台打印出什么？</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="keyword">var</span> a = b = <span class="number">5</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;)();</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 5</span></span></pre></td></tr></table></figure>
 
-<p>&lt;!-– more –-&gt;</p>
+<a id="more"></a>
+
 <p>解析：在函数的内部，有两个变量，其中变量 a 的前面加了关键字 <code>var</code> 进行声明，说明该变量是局部变量，但是变量 b 是没有加关键字的，即是全局变量，所以第二行代码实际上等价于 <code>var a = window.b = 5</code>。</p>
 <h3 id="第三题、以下代码的结果是什么？"><a href="#第三题、以下代码的结果是什么？" class="headerlink" title="第三题、以下代码的结果是什么？"></a>第三题、以下代码的结果是什么？</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window name'</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  name: <span class="string">'Chou'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  child: &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    name: <span class="string">'Fay Chou'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">    getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.name;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(person.child.getName()); <span class="comment">// Fay Chou</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> test = person.child.getName;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(test()); <span class="comment">// window name</span></span></pre></td></tr></table></figure>
 
