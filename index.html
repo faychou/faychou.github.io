@@ -416,7 +416,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/web/newblogbuildingsummary/">
+    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/AJAX/ruhejiejueajaxkuayu/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -430,7 +430,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/web/newblogbuildingsummary/" class="post-title-link" itemprop="url">新博客的搭建</a>
+            <a href="/AJAX/ruhejiejueajaxkuayu/" class="post-title-link" itemprop="url">如何解决 AJAX 跨域</a>
         </h1>
 
         <div class="post-meta">
@@ -440,14 +440,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-11-22 19:25:14" itemprop="dateCreated datePublished" datetime="2019-11-22T19:25:14+08:00">2019-11-22</time>
+              <time title="创建时间：2019-11-20 21:23:10" itemprop="dateCreated datePublished" datetime="2019-11-20T21:23:10+08:00">2019-11-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 11:02:08" itemprop="dateModified" datetime="2019-11-29T11:02:08+08:00">2019-11-29</time>
+                <time title="修改时间：2019-11-29 14:13:31" itemprop="dateModified" datetime="2019-11-29T14:13:31+08:00">2019-11-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -455,14 +455,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
+                  <a href="/categories/AJAX/" itemprop="url" rel="index">
+                    <span itemprop="name">AJAX</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/web/newblogbuildingsummary/" class="post-meta-item leancloud_visitors" data-flag-title="新博客的搭建" title="阅读次数">
+            <span id="/AJAX/ruhejiejueajaxkuayu/" class="post-meta-item leancloud_visitors" data-flag-title="如何解决 AJAX 跨域" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -479,29 +479,125 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown 解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h3 id="hexo-安装"><a href="#hexo-安装" class="headerlink" title="hexo 安装"></a>hexo 安装</h3><p>首先确保电脑已经安装了 nodejs 和 git，如果没有安装请先安装后再执行以下操作。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g <span class="comment"># 脚手架</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">hexo init myBlog <span class="comment"># 创建项目</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> myBlog <span class="comment"># 进入目录</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">npm install <span class="comment"># 安装依赖</span></span></pre></td></tr></table></figure>
-
-<h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">├── _config.yml  <span class="comment"># 网站的配置文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">├── package.json <span class="comment"># 应用程序的信息</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">├── scaffolds <span class="comment"># 通用的 markdown 模板</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">├── <span class="built_in">source</span> <span class="comment"># 存放用户资源的地方</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">|   ├── _drafts <span class="comment"># 草稿文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">|   └── _posts <span class="comment"># 发布的文章</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">└── themes <span class="comment"># 博客的模板</span></span></pre></td></tr></table></figure>
-
-<h3 id="使用主题"><a href="#使用主题" class="headerlink" title="使用主题"></a>使用主题</h3><p>hexo 有非常丰富的第三方主题，可以快速帮助我们搭建功能强大的博客网站：</p>
-<p>第一步、下载主题模板 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">点击这里获取主题模板</a>；</p>
-<p>第二步、将下载的模板解压到 themes 目录；</p>
-<p>第三步、修改根目录下的 <code>_config.yml</code> 文件：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">模板名字</span></span></pre></td></tr></table></figure>
-
-<h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h3><p>在终端运行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span></pre></td></tr></table></figure>
-
-<p>这样在根目录下的 <code>source/_posts</code> 目录下就会生成一个 <code>.md</code>  的文件了，然后就可以直接进行编辑。</p>
-<p>_或者直接在 <code>_posts</code> 目录下新建 markdown 文件编辑，在 <code>_drafts</code> 目录新建 markdown 文件，就是草稿。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="attr">layout:</span> <span class="string">post</span> <span class="string">或者</span> <span class="string">get</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">文章的标题，默认</span> <span class="string">filename</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="attr">date:</span> <span class="string">文件的创建日期，如：2018-08-31</span> <span class="number">17</span><span class="string">:54:54</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="attr">updated:</span> <span class="string">文件的修改日期</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="attr">comments:</span> <span class="string">是否开启评论,</span> <span class="literal">true</span> <span class="string">或者</span> <span class="literal">false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="attr">tags:</span> <span class="string">文章的标签</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="attr">categories:</span> <span class="string">文章分类</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">自定义</span> <span class="string">url</span> <span class="string">中的名字</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span></pre></td></tr></table></figure>
-
-<p>有时候我们需要截取一部分文章作为首页的摘要显示,可以在文章中添加分隔符号:</p>
+          <p>在开发中有一个无法避免的问题，那就是请求跨域，产生的原因是因为浏览器的“同源策略”，所谓的同源就是指：</p>
+<ul>
+<li>协议，例：http 和 https</li>
+</ul>
+<ul>
+<li>域名，例：faychou.com 和 faychou.cn</li>
+<li>端口，例：80 和 8080</li>
+</ul>
+<p>同源策略的目的，是为了保证用户信息的安全，防止恶意的网站窃取数据。</p>
+<p>而跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，那就会发生跨域。</p>
+<p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1g9evpgeankj20eo05fq2y.jpg" alt="跨域错误"></p>
+<p>解决跨域的方案有很多种，这里主要介绍其中比较常用的。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/web/newblogbuildingsummary/#more" rel="contents">
+              <a class="btn" href="/AJAX/ruhejiejueajaxkuayu/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="content-item-read">
+          
+        </div>
+        <div></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/Vue/vuehuanjingdajian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="飞舟">
+      <meta itemprop="description" content="分享web前端开发技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飞舟实验室">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/Vue/vuehuanjingdajian/" class="post-title-link" itemprop="url">vue环境搭建</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-19 22:56:16" itemprop="dateCreated datePublished" datetime="2019-11-19T22:56:16+08:00">2019-11-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-29 14:26:55" itemprop="dateModified" datetime="2019-11-29T14:26:55+08:00">2019-11-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/Vue/vuehuanjingdajian/" class="post-meta-item leancloud_visitors" data-flag-title="vue环境搭建" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>vue-cli 是 vue 官方的一个快速开发工具，可用于快速搭建大型单页应用。目前最新的 vue-cli 已经改名为 @vue/cli 了。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>打开终端（cmd）执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果安装了 yarn 则可以使用这条命令</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">yarn add global @vue/cli</span></pre></td></tr></table></figure>
+
+<h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">vue create &lt;project-name&gt;</span></pre></td></tr></table></figure>
+
+<p><code>&lt;project-name&gt;</code> 这里填写项目的名字（非中文），然后根据提示选择即可，注意新版本把插件以及模板等移植到命令行界面了。</p>
+<p>当第一次选择的时候有两个选项（版本不同可能有细微差别）：default(默认配置) 和 Manually select features(自定义配置)。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Vue CLI v4.0.5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">? Please pick a preset:    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  default (babel, eslint)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&gt; Manually select features</span></pre></td></tr></table></figure>
+
+<p>default 的配置我就不说了，基本没有修改的地方，主要讲一下 Manually select features ，通过键盘上下方向键，选中 Manually select features 然后敲击回车进入下一步：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">? Please pick a preset: Manually select features</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">? Check the features needed <span class="keyword">for</span> your project: (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to invert selection)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt;(*) Babel</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> ( ) TypeScript</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"> (*) Progressive Web App (PWA) Support</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"> ( ) Router</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"> ( ) Vuex</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"> (*) CSS Pre-processors</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"> (*) Linter / Formatter</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"> ( ) Unit Testing</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"> ( ) E2E Testing</span></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Vue/vuehuanjingdajian/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -620,6 +716,221 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/CSS/cssxidixiaoguo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="飞舟">
+      <meta itemprop="description" content="分享web前端开发技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飞舟实验室">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/CSS/cssxidixiaoguo/" class="post-title-link" itemprop="url">CSS 吸底效果</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-15 08:52:33" itemprop="dateCreated datePublished" datetime="2019-11-15T08:52:33+08:00">2019-11-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-29 14:32:23" itemprop="dateModified" datetime="2019-11-29T14:32:23+08:00">2019-11-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/CSS/cssxidixiaoguo/" class="post-meta-item leancloud_visitors" data-flag-title="CSS 吸底效果" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天给大家分享一种网页中常见的一种效果，叫做吸底效果。</p>
+<p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1g9ewbqvma2g20c808b7wh.gif" alt="吸底效果展示"></p>
+<p>当主体区域的内容较少时，页脚区不是随着内容区排布，而是吸底在浏览器的最下方；当主体区域的内容较多，撑出滚动条时，页脚区能随着内容区的增高而离开浏览器的底部，并始终显示在页面的最底部。</p>
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>使用 CSS 中最新的 <code>calc()</code> 函数 和 视口单位：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span><span class="tag">&lt;/<span class="name">header</span>&gt;</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">header</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">/* 1vh = 视口高度的 1% */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">min-height</span>: <span class="built_in">calc</span>(100vh - 50px - 50px); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">box-sizing</span>: border-box; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">footer</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>缺点一就是不兼容低版本的IE，当然了现在连微软也放弃了IE，所以这一点可以忽略，缺点二就是每次都要重新计算容器的 <code>min-heighgt</code>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/CSS/cssxidixiaoguo/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="content-item-read">
+          
+        </div>
+        <div></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/web/newblogbuildingsummary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="飞舟">
+      <meta itemprop="description" content="分享web前端开发技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飞舟实验室">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/web/newblogbuildingsummary/" class="post-title-link" itemprop="url">新博客的搭建</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-12 19:25:14" itemprop="dateCreated datePublished" datetime="2019-11-12T19:25:14+08:00">2019-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-29 13:34:44" itemprop="dateModified" datetime="2019-11-29T13:34:44+08:00">2019-11-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/web/newblogbuildingsummary/" class="post-meta-item leancloud_visitors" data-flag-title="新博客的搭建" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown 解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h3 id="hexo-安装"><a href="#hexo-安装" class="headerlink" title="hexo 安装"></a>hexo 安装</h3><p>首先确保电脑已经安装了 nodejs 和 git，如果没有安装请先安装后再执行以下操作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g <span class="comment"># 脚手架</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">hexo init myBlog <span class="comment"># 创建项目</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> myBlog <span class="comment"># 进入目录</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">npm install <span class="comment"># 安装依赖</span></span></pre></td></tr></table></figure>
+
+<h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">├── _config.yml  <span class="comment"># 网站的配置文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">├── package.json <span class="comment"># 应用程序的信息</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">├── scaffolds <span class="comment"># 通用的 markdown 模板</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">├── <span class="built_in">source</span> <span class="comment"># 存放用户资源的地方</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">|   ├── _drafts <span class="comment"># 草稿文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">|   └── _posts <span class="comment"># 发布的文章</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">└── themes <span class="comment"># 博客的模板</span></span></pre></td></tr></table></figure>
+
+<h3 id="使用主题"><a href="#使用主题" class="headerlink" title="使用主题"></a>使用主题</h3><p>hexo 有非常丰富的第三方主题，可以快速帮助我们搭建功能强大的博客网站：</p>
+<p>第一步、下载主题模板 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">点击这里获取主题模板</a>；</p>
+<p>第二步、将下载的模板解压到 themes 目录；</p>
+<p>第三步、修改根目录下的 <code>_config.yml</code> 文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">模板名字</span></span></pre></td></tr></table></figure>
+
+<h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h3><p>在终端运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span></pre></td></tr></table></figure>
+
+<p>这样在根目录下的 <code>source/_posts</code> 目录下就会生成一个 <code>.md</code>  的文件了，然后就可以直接进行编辑。</p>
+<p>_或者直接在 <code>_posts</code> 目录下新建 markdown 文件编辑，在 <code>_drafts</code> 目录新建 markdown 文件，就是草稿。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="attr">layout:</span> <span class="string">post</span> <span class="string">或者</span> <span class="string">get</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">文章的标题，默认</span> <span class="string">filename</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="attr">date:</span> <span class="string">文件的创建日期，如：2018-08-31</span> <span class="number">17</span><span class="string">:54:54</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="attr">updated:</span> <span class="string">文件的修改日期</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="attr">comments:</span> <span class="string">是否开启评论,</span> <span class="literal">true</span> <span class="string">或者</span> <span class="literal">false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="attr">tags:</span> <span class="string">文章的标签</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="attr">categories:</span> <span class="string">文章分类</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">自定义</span> <span class="string">url</span> <span class="string">中的名字</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span></pre></td></tr></table></figure>
+
+<p>有时候我们需要截取一部分文章作为首页的摘要显示,可以在文章中添加分隔符号:</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/web/newblogbuildingsummary/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="content-item-read">
+          
+        </div>
+        <div></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -667,20 +978,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

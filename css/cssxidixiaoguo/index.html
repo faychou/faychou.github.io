@@ -51,18 +51,20 @@
   };
 </script>
 
-  <meta name="description" content="环境配置在 小程序、RN、Flutter 大行其道的环境下，为什么今天还要给大家聊聊网页版的移动布局，只能说各有各的需求。 我们都知道，移动端 web 网页布局最大的挑战就是适配各种手机，不止是因为手机尺寸不一，更因为手机设备有一个叫 dpr 的参数，提高了手机分辨率的情况下，也对程序的开发提出了更高的要求。 目前主流的 UI 设计方案是针对 iphone6 的手机尺寸（375 * 667 像素）">
-<meta name="keywords" content="布局,vue,app">
+  <meta name="description" content="今天给大家分享一种网页中常见的一种效果，叫做吸底效果。  当主体区域的内容较少时，页脚区不是随着内容区排布，而是吸底在浏览器的最下方；当主体区域的内容较多，撑出滚动条时，页脚区能随着内容区的增高而离开浏览器的底部，并始终显示在页面的最底部。 方法一使用 CSS 中最新的 calc() 函数 和 视口单位： 1&amp;lt;header&amp;gt;&amp;lt;&#x2F;header&amp;gt; 2&amp;lt;div class&#x3D;">
+<meta name="keywords" content="css,布局">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue 移动端适配及打包为 APP">
-<meta property="og:url" content="https:&#x2F;&#x2F;www.faychou.cn&#x2F;%E7%A7%BB%E5%8A%A8%E7%AB%AF&#x2F;vuemobileandapp&#x2F;">
+<meta property="og:title" content="CSS 吸底效果">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.faychou.cn&#x2F;CSS&#x2F;cssxidixiaoguo&#x2F;">
 <meta property="og:site_name" content="飞舟实验室">
-<meta property="og:description" content="环境配置在 小程序、RN、Flutter 大行其道的环境下，为什么今天还要给大家聊聊网页版的移动布局，只能说各有各的需求。 我们都知道，移动端 web 网页布局最大的挑战就是适配各种手机，不止是因为手机尺寸不一，更因为手机设备有一个叫 dpr 的参数，提高了手机分辨率的情况下，也对程序的开发提出了更高的要求。 目前主流的 UI 设计方案是针对 iphone6 的手机尺寸（375 * 667 像素）">
+<meta property="og:description" content="今天给大家分享一种网页中常见的一种效果，叫做吸底效果。  当主体区域的内容较少时，页脚区不是随着内容区排布，而是吸底在浏览器的最下方；当主体区域的内容较多，撑出滚动条时，页脚区能随着内容区的增高而离开浏览器的底部，并始终显示在页面的最底部。 方法一使用 CSS 中最新的 calc() 函数 和 视口单位： 1&amp;lt;header&amp;gt;&amp;lt;&#x2F;header&amp;gt; 2&amp;lt;div class&#x3D;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-29T03:02:22.667Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;6bdc6680gy1g9ewbqvma2g20c808b7wh.gif">
+<meta property="og:updated_time" content="2019-11-29T06:32:23.174Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;6bdc6680gy1g9ewbqvma2g20c808b7wh.gif">
 
-<link rel="canonical" href="https://www.faychou.cn/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/">
+<link rel="canonical" href="https://www.faychou.cn/CSS/cssxidixiaoguo/">
 
 
 <script id="page-configurations">
@@ -76,7 +78,7 @@
   };
 </script>
 
-  <title>vue 移动端适配及打包为 APP | 飞舟实验室</title>
+  <title>CSS 吸底效果 | 飞舟实验室</title>
   
 
 
@@ -220,7 +222,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/">
+    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/CSS/cssxidixiaoguo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -233,7 +235,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          vue 移动端适配及打包为 APP
+          CSS 吸底效果
         </h1>
 
         <div class="post-meta">
@@ -243,14 +245,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-11-24 17:11:44" itemprop="dateCreated datePublished" datetime="2019-11-24T17:11:44+08:00">2019-11-24</time>
+              <time title="创建时间：2019-11-15 08:52:33" itemprop="dateCreated datePublished" datetime="2019-11-15T08:52:33+08:00">2019-11-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 11:02:22" itemprop="dateModified" datetime="2019-11-29T11:02:22+08:00">2019-11-29</time>
+                <time title="修改时间：2019-11-29 14:32:23" itemprop="dateModified" datetime="2019-11-29T14:32:23+08:00">2019-11-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,14 +260,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">移动端</span>
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/" class="post-meta-item leancloud_visitors" data-flag-title="vue 移动端适配及打包为 APP" title="阅读次数">
+            <span id="/CSS/cssxidixiaoguo/" class="post-meta-item leancloud_visitors" data-flag-title="CSS 吸底效果" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -289,25 +291,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>在 小程序、RN、Flutter 大行其道的环境下，为什么今天还要给大家聊聊网页版的移动布局，只能说各有各的需求。</p>
-<p>我们都知道，移动端 web 网页布局最大的挑战就是适配各种手机，不止是因为手机尺寸不一，更因为手机设备有一个叫 dpr 的参数，提高了手机分辨率的情况下，也对程序的开发提出了更高的要求。</p>
-<p>目前主流的 UI 设计方案是针对 iphone6 的手机尺寸（375 * 667 像素），但是设计图大小会设计为 750 * 1334 像素，因为 dpr 为 2，不清楚的童鞋可以参考这篇文章 <a href=""></a>，里面讲的很详细。这就要求前端的同学根据 UI 的设计稿做到开发的程序能够适配不同的手机尺寸大小。由于目前的 vw 的兼容性还有待提升，于是就有了迂回的政策–使用 rem 单位，该单位是相对于根标签的字体大小的，只要根标签的字体大小发生改变，rem 的大小也会跟着一起改变，从而实现自适应不同的设备。具体实施方案，请看以下步骤（基于 vue/cli3 搭建的环境）：</p>
-<p>第一步、安装相关依赖模块；</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm i amfe-flexible --save // 适配方案，会自动根据设备去修改根标签字体大小</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">npm i postcss-pxtorem --save-dev     // 把 px 转换成对应的 rem</span></pre></td></tr></table></figure>
+        <p>今天给大家分享一种网页中常见的一种效果，叫做吸底效果。</p>
+<p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1g9ewbqvma2g20c808b7wh.gif" alt="吸底效果展示"></p>
+<p>当主体区域的内容较少时，页脚区不是随着内容区排布，而是吸底在浏览器的最下方；当主体区域的内容较多，撑出滚动条时，页脚区能随着内容区的增高而离开浏览器的底部，并始终显示在页面的最底部。</p>
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>使用 CSS 中最新的 <code>calc()</code> 函数 和 视口单位：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span><span class="tag">&lt;/<span class="name">header</span>&gt;</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span></pre></td></tr></table></figure>
 
-<p>在项目根目录下找到 public 下的 index.html 文件，在 head 中相应位置添加以下代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, maximum-scale=1"</span>&gt;</span></span></pre></td></tr></table></figure>
 
-<p>第二步、在 main.js 中引入 适配文件：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'amfe-flexible'</span></span></pre></td></tr></table></figure>
 
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">header</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">/* 1vh = 视口高度的 1% */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">min-height</span>: <span class="built_in">calc</span>(100vh - 50px - 50px); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">box-sizing</span>: border-box; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">footer</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>缺点一就是不兼容低版本的IE，当然了现在连微软也放弃了IE，所以这一点可以忽略，缺点二就是每次都要重新计算容器的 <code>min-heighgt</code>。</p>
 <a id="more"></a>
 
-<p>第三步、在项目根目录下创建 vue.config.js 配置文件:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">'autoprefixer'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pxtorem = <span class="built_in">require</span>(<span class="string">'postcss-pxtorem'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    css: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        loaderOptions: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">          css: &#123;&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">          postcss: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            plugins: [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">              autoprefixer(),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">              pxtorem(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                rootValue: <span class="number">75</span>, <span class="comment">// 基准值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                propList: [<span class="string">'*'</span>] <span class="comment">// 决定哪些属性值自动转换，如：propList: ['font', 'font-size', 'line-height', 'letter-spacing'],</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">              &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            ]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">          &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>上方的 rootValue 是基准值，假如设计图给的宽度是 750，通常就会把 rootValue 设置为75，这样写样式时，可以直接按照设计图标注的宽高来 1:1 还原，如：设计图上图片大小为 300 像素，那我们在代码里也直接写 300px 。</p>
-<p>完成配置修改后，重启服务器即可。</p>
-<h1 id="打包为-APP"><a href="#打包为-APP" class="headerlink" title="打包为 APP"></a>打包为 APP</h1>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>使用弹性布局，HTML 结构同方法一：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">display</span>: flex;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">flex-flow</span>: column; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">min-height</span>: <span class="number">100vh</span>; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123; <span class="attribute">flex</span>: <span class="number">1</span>; &#125;</span></pre></td></tr></table></figure>
+
+<p>如果不考虑 IE 兼容的话，该方案很完美。</p>
+<h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">     主体内容</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    底部</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.wrapper</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">position</span>: relative;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">min-height</span>:<span class="number">100%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">padding-bottom</span>: <span class="number">50px</span>;   <span class="comment">/* 该值设置大于等于底部的高度 */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">footer</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">position</span>: absolute;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -341,25 +346,24 @@
           
         </div>
           <div class="post-tags">
+              <a href="/tags/css/" rel="tag"># css</a>
               <a href="/tags/%E5%B8%83%E5%B1%80/" rel="tag"># 布局</a>
-              <a href="/tags/vue/" rel="tag"># vue</a>
-              <a href="/tags/app/" rel="tag"># app</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/AJAX/ruhejiejueajaxkuayu/" rel="next" title="如何解决 AJAX 跨域">
-                  <i class="fa fa-chevron-left"></i> 如何解决 AJAX 跨域
+                <a href="/web/newblogbuildingsummary/" rel="next" title="新博客的搭建">
+                  <i class="fa fa-chevron-left"></i> 新博客的搭建
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/Ajax/axiossendpostandjavareceive/" rel="prev" title="axios发送post请求java后端无法拿到数据">
-                  axios发送post请求java后端无法拿到数据 <i class="fa fa-chevron-right"></i>
+                <a href="/JavaScript/10-jingdianmianshiti/" rel="prev" title="10道经典面试题">
+                  10道经典面试题 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -399,7 +403,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境配置"><span class="nav-number">1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打包为-APP"><span class="nav-number">2.</span> <span class="nav-text">打包为 APP</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一"><span class="nav-number">1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二"><span class="nav-number">2.</span> <span class="nav-text">方法二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法三"><span class="nav-number">3.</span> <span class="nav-text">方法三</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
