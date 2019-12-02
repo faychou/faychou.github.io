@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>如何将hexo搭建的博客部署到阿里云</title>
+    <url>/hexo/ruhejianghexobushuzaialiyun/</url>
+    <content><![CDATA[<p>之前有给大家讲过通过 hexo 可以快速搭建博客，并将之部署在 github 上进行访问，通过 github 提供的站点可以节约购买空间和域名的费用。而如果是动手能力强的同学或者想要一个属于自己的专属空间的同学，则完全可以自己来搭建一个服务器。</p>
+<h2 id="部署到阿里云"><a href="#部署到阿里云" class="headerlink" title="部署到阿里云"></a>部署到阿里云</h2><p>要实现这个功能需要你拥有自己的域名以及阿里云服务器，当然其他的云空间也是可以的，操作步骤基本相同，我这里就以阿里云的 centOS7 为例。</p>
+<p>首先，必须确保 centOS7 系统中已经安装了 nodejs 和 git，如果不清楚的可以参考我的这篇文章 <a href="如何在centOS7下配置环境.md">如何在centOS7下配置环境</a>。</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>CentOS</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何在centOS7下配置环境</title>
+    <url>/Linux/peizhicentoshuanjing/</url>
+    <content><![CDATA[<h3 id="nodejs-安装"><a href="#nodejs-安装" class="headerlink" title="nodejs 安装"></a>nodejs 安装</h3><h3 id="MySQL-安装"><a href="#MySQL-安装" class="headerlink" title="MySQL 安装"></a>MySQL 安装</h3><h3 id="MongoDB-安装"><a href="#MongoDB-安装" class="headerlink" title="MongoDB 安装"></a>MongoDB 安装</h3><h3 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h3><h3 id="Git-安装"><a href="#Git-安装" class="headerlink" title="Git 安装"></a>Git 安装</h3><p>第一种安装方法、使用 git 源码编译安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装依赖</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">yum -y install gcc zlib-devel openssl-devel cpio expat-devel gettext-devel curl-devel perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment"># 下载 git</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">wget https://github.com/git/git/archive/v2.14.1.zip</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment"># 解压 git</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">unzip v2.14.1.zip</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment"># 先进入 git-2.14.1 文件夹</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> git-2.14.1</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment"># 编译</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">make prefix=/usr/<span class="built_in">local</span> all</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">make prefix=/usr/<span class="built_in">local</span> install</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment"># 验证是否安装完成，如果返回一个版本号就说明安装成功</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">git --version</span></pre></td></tr></table></figure>
+
+<p>第二种安装方法、使用 yum 安装（推荐 CentOS7 以上采用这个方式）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install git</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment"># 验证</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">git --version</span></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>CentOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在vue项目中遇到的bug</title>
+    <url>/uncategorized/%E5%9C%A8vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84bug/</url>
+    <content><![CDATA[<h3 id="vue-打包后路径问题"><a href="#vue-打包后路径问题" class="headerlink" title="vue 打包后路径问题"></a>vue 打包后路径问题</h3><p>一般情况下通过 <code>npm run build</code> 打包后，直接将 build 文件夹下的所有文件全部丢到后台的静态资源服务器上，就可以正常的访问了。但是开发的事情谁说的准，有时候想要在本地直接预览，或者打包为 APP 的时候，如果直接点击 <code>index.html</code>，打开的网页可能就是一片空白，控制台报一堆的 404。其实这个时候只要看一下打包后的 <code>index.html</code> 文件代码就能知道，所有文件的引入地址都是以<code>/</code>开头的绝对路径，指向 http 服务器的根路径，如下图红色方框所示：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1g9ho5giwcij20nn0fb74p.jpg" alt=""></p>
+<p>要解决这个问题其实也很简单，主要分以下两个方面：</p>
+<p>1、解决资源引入错误问题：</p>
+<p>在 <code>vue.config.js</code> 中设置 <code>publicPath: &#39;./&#39;</code>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  publicPath: <span class="string">'./'</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>这样所有的资源都会被链接为相对路径，这样打出来的包可以被部署在任意路径。</p>
+<p>2、解决图片引入问题：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> img1 <span class="keyword">from</span> <span class="string">'@assets/images/img01.jpg'</span></span></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
     <title>axios发送post请求java后端无法拿到数据</title>
     <url>/Ajax/axiossendpostandjavareceive/</url>
     <content><![CDATA[<h3 id="场景描述："><a href="#场景描述：" class="headerlink" title="场景描述："></a>场景描述：</h3><p>如果后端是 Java（springmvc），前端使用 jQuery 的 <code>$.ajax</code> 发送 POST 请求，测试接口是没问题的。但是换做使用 axios 来发送 POST 请求，后端却无法获取数据。</p>
@@ -39,9 +88,30 @@
   <entry>
     <title>vue 移动端适配及打包为 APP</title>
     <url>/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/</url>
-    <content><![CDATA[<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>在 小程序、RN、Flutter 大行其道的环境下，为什么今天还要给大家聊聊网页版的移动布局，只能说各有各的需求。</p>
-<p>我们都知道，移动端 web 网页布局最大的挑战就是适配各种手机，不止是因为手机尺寸不一，更因为手机设备有一个叫 dpr 的参数，提高了手机分辨率的情况下，也对程序的开发提出了更高的要求。</p>
-<p>目前主流的 UI 设计方案是针对 iphone6 的手机尺寸（375 * 667 像素），但是设计图大小会设计为 750 * 1334 像素，因为 dpr 为 2，不清楚的童鞋可以参考这篇文章 <a href=""></a>，里面讲的很详细。这就要求前端的同学根据 UI 的设计稿做到开发的程序能够适配不同的手机尺寸大小。由于目前的 vw 的兼容性还有待提升，于是就有了迂回的政策–使用 rem 单位，该单位是相对于根标签的字体大小的，只要根标签的字体大小发生改变，rem 的大小也会跟着一起改变，从而实现自适应不同的设备。具体实施方案，请看以下步骤（基于 vue/cli3 搭建的环境）：</p>
+    <content><![CDATA[<blockquote>
+<p>环境依赖:</p>
+<p>@vue/cli  4.0.5</p>
+<p>vue  2.6.10</p>
+<p>amfe-flexible  2.2.1</p>
+<p>postcss-pxtorem  4.0.1</p>
+</blockquote>
+<p>在 小程序、RN、Flutter 大行其道的环境下，为什么今天还要给大家聊聊网页版的移动布局，只能说各有各的需求。</p>
+<p>设计师在提供设计图时，一般只提供一个分辨率的 UI 图。如果严格按照这个图去设置各个元素的 px 值，那么在不同宽度的手机上界面很容易会发生变形。对前端的挑战是如何通过一套代码去适配各种宽度的手机，而这个并不是我们以前惯用的响应式就可以解决的。</p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>像素是指计算机能够显示一种特定颜色的最小区域。在设备尺寸相同的情况下，像素越密集，屏幕能显示的画面就越清晰。</p>
+<p><strong>ppi</strong>：是指屏幕上每英寸可以显示的像素点的数量，即屏幕像素密度。</p>
+<p><strong>设备像素</strong>(device independent pixels): 设备屏幕的物理像素，是硬件固有的像素。</p>
+<p><strong>CSS像素</strong>(CSS pixels): 又称为逻辑像素，是通过算法实现的，为 web 开发者创造。</p>
+<p><strong>dpr</strong>(devicePixelRatio)：是物理像素与逻辑像素的比，也称为设备像素比。</p>
+<p>dpr 的出现是苹果公司在 iphone4 产品中推出了所谓的 retina 视网膜屏幕。之所以叫做视网膜屏幕，是因为屏幕的 ppi 太高，人的视网膜无法分辨出屏幕上的像素点。在保持屏幕尺寸大小不变的情况下将物理分辨率提高了一倍，这意味着同样大小的屏幕上，像素多了一倍。</p>
+<p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1g9ik7qklhcg20q70f9q32.gif" alt="原谅我的懒惰盗张图"></p>
+<p>一般情况下 PC 端网页的1个 CSS 像素是对应着电脑屏幕的1个物理像素，而在手机端，由于屏幕尺寸的限制，一个元素的 CSS 像素（如 width: 200px;）是始终不变的，而一个 CSS 像素对应多少个物理像素是与 ppi 有关的。</p>
+<p>以 iphone6 的尺寸为例，CSS像素为 <code>375*667</code>，dpr 为2，那么其设备像素就是：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">375 * 2 = 750</span></pre></td></tr><tr><td class="code"><pre><span class="line">667 * 2 = 1334</span></pre></td></tr></table></figure>
+
+<p>这就是为什么设计师在画图时以 iphone6 为参考，设计出的尺寸大小为 <code>750*1334</code> 的原因。</p>
+<p>而前端同学根据一个 UI 图要做到能够适配不同的手机尺寸大小，就要求所使用的 CSS 单位能在不同设备上自动缩放，以达到同一元素在不同设备上的占比是一样的。除了使用兼容性不是很好的 vw 方案外，还可以参考手淘网给出的解决方案 <a href="https://github.com/amfe/article/issues/17" target="_blank" rel="noopener">具体详情可以点击这里查看…</a>。</p>
+<p>使用 rem 替代 px，因为 rem 是相对于根标签的字体大小的，只要在不同的设备上根据 dpr 的值去修改根标签的字体大小，这样 rem 的大小也会跟着一起改变，从而实现自适应不同的设备。</p>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>为了解决每次将设计稿上的 px 转为对应的 rem 所带来的计算问题，以下给出一个 postcss 的解决方案：</p>
 <p>第一步、安装相关依赖模块；</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i amfe-flexible --save // 适配方案，会自动根据设备去修改根标签字体大小</span></pre></td></tr><tr><td class="code"><pre><span class="line">npm i postcss-pxtorem --save-dev     // 把 px 转换成对应的 rem</span></pre></td></tr></table></figure>
 
@@ -55,16 +125,44 @@
 
 <p>第三步、在项目根目录下创建 vue.config.js 配置文件:</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">'autoprefixer'</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> pxtorem = <span class="built_in">require</span>(<span class="string">'postcss-pxtorem'</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    css: &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        loaderOptions: &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">          css: &#123;&#125;,</span></pre></td></tr><tr><td class="code"><pre><span class="line">          postcss: &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">            plugins: [</span></pre></td></tr><tr><td class="code"><pre><span class="line">              autoprefixer(),</span></pre></td></tr><tr><td class="code"><pre><span class="line">              pxtorem(&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">                rootValue: <span class="number">75</span>, <span class="comment">// 基准值</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">                propList: [<span class="string">'*'</span>] <span class="comment">// 决定哪些属性值自动转换，如：propList: ['font', 'font-size', 'line-height', 'letter-spacing'],</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">              &#125;)</span></pre></td></tr><tr><td class="code"><pre><span class="line">            ]</span></pre></td></tr><tr><td class="code"><pre><span class="line">          &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>上方的 rootValue 是基准值，假如设计图给的宽度是 750，通常就会把 rootValue 设置为75，这样写样式时，可以直接按照设计图标注的宽高来 1:1 还原，如：设计图上图片大小为 300 像素，那我们在代码里也直接写 300px 。</p>
-<p>完成配置修改后，重启服务器即可。</p>
-<h1 id="打包为-APP"><a href="#打包为-APP" class="headerlink" title="打包为 APP"></a>打包为 APP</h1>]]></content>
+<p>上方的 rootValue 是基准值，假如设计图给的宽度是 750，通常就会把 rootValue 设置为75，这样写样式时，可以直接按照设计图标注的宽高来 1:1 还原，如：设计图上图片大小为 300 像素，那我们在代码里也直接写 300px 。完成配置修改后，重启服务器即可。</p>
+<p>如果在项目中使用了 vant 等第三方的 UI 框架，因为这些第三方框架没有兼容 rem，用的依旧是 px 单位，所以 <code>rootValue</code> 的值要设置为设计图宽度 75 的一半，即 <code>37.5</code>，这样才可以 <code>1:1</code> 还原 vant 的组件，否则会样式会有变化。那么相应的在写样式时，也将值改为设计图的一半。</p>
+<p><a href="https://github.com/faychou/code-example/tree/master/vue-example/vue-mobile-adapter" target="_blank" rel="noopener">项目源码</a></p>
+<h3 id="如何将-web-页面打包为-APP"><a href="#如何将-web-页面打包为-APP" class="headerlink" title="如何将 web 页面打包为 APP"></a>如何将 web 页面打包为 APP</h3><p>有时候公司为了节约开发成本，想将现成的 web app 直接发布为 Native APP ，怎么办勒？首先这个是可行的，对前端来说实现起来也比较简单。</p>
+<h3 id="build-项目"><a href="#build-项目" class="headerlink" title="build 项目"></a>build 项目</h3><p>首先需要将开发完毕的 vue  项目打包出来，但是在这一步之前，需要修改一下打包配置：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在根目录下新建 vue.config.js</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  publicPath: <span class="string">'./'</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>如果项目中使用了 <code>vue-router</code>，最好将路由模式修改为 <code>hash</code>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 修改路由的配置 ./router/index.js</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="comment">// mode: 'history',如果有这句代码就直接删除</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  base: process.env.BASE_URL,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  routes</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<p>然后运行以下命令打包程序：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span></pre></td></tr></table></figure>
+
+<p>这时就会在根目录下生成 dist 目录，该目录下就是最终的程序。</p>
+<h3 id="创建-APP-项目"><a href="#创建-APP-项目" class="headerlink" title="创建 APP 项目"></a>创建 APP 项目</h3><p>我这里以最新的 Hbuilder X 为例来讲解，如果没有安装这个工具，直接 <a href="https://www.dcloud.io/hbuilderx.html" target="_blank" rel="noopener">点击这里下载</a> 。打开 Hbuilder X，选择菜单上的：文件 -&gt; 新建 -&gt; 项目</p>
+<p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1g9hpotn68hj20mc0hcdfx.jpg" alt="创建移动项目"></p>
+<p>创建之后的项目结构如下：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1g9hphuju4mj208005lq2q.jpg" alt="项目解构"></p>
+<p>除了 <code>unpackage</code>（是放置app图标和启动界面的图片，自动生成） 和 <code>manifest.json</code>（移动APP的配置文件）外，其他的文件和文件夹可以全部删掉，然后将上一步打包好的 dist 文件夹下所有的文件及文件夹复制过来。</p>
+<p>其实这一步最关键的在于 <code>manifest.json</code> 文件，只要有该文件，基本可以将大部分的 web 应用打包为 APP。</p>
+<h3 id="生成-APP"><a href="#生成-APP" class="headerlink" title="生成 APP"></a>生成 APP</h3><p>第一步、配置 <code>manifest.json</code> 文件，这里主要配置应用名称，应用标识（注册之后会自动生成的），应用的图标等，其他的看项目情况配置：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1g9il01kj0lj21870ns751.jpg" alt="manifest配置"></p>
+<p>第二步、点击上方菜单：发行 –&gt; 原生App-云打包，简单配置打包信息：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1g9hpm3m2gdj20ic0lt0t1.jpg" alt=""></p>
+<p>在这里简单的配置 app 的信息，因为涉及到证书的问题，这里就只勾选了 Android 包，然后选择公共测试证书，将广告联盟的勾全部去掉，其他就可以不设置了，直接点击打包按钮。</p>
+<p>打包完成后，在下方的控制台就会有提示，根据返回的链接就可以直接下载程序进行测试了。</p>
+<p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1g9hpnplhotj2153095mxd.jpg" alt=""></p>
+<h3 id="解决打包成-APP-后，按手机返回键退出应用的-bug"><a href="#解决打包成-APP-后，按手机返回键退出应用的-bug" class="headerlink" title="解决打包成 APP 后，按手机返回键退出应用的 bug"></a>解决打包成 APP 后，按手机返回键退出应用的 bug</h3><p>将以下代码加入到打包后的 <code>index.html</code> 中：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="javascript">  <span class="built_in">document</span>.addEventListener(<span class="string">'plusready'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123; <span class="comment">// 等待 plus ready 后再调用 5+ API：</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="actionscript">    <span class="comment">// 在这里调用 5+ API</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="actionscript">    <span class="keyword">var</span> first = <span class="literal">null</span>;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="actionscript">    plus.key.addEventListener(<span class="string">'backbutton'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123; <span class="comment">// 监听返回键</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="actionscript">      <span class="comment">// 首次按键，提示‘再按一次退出应用’</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line">      if (!first) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="javascript">        first = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(); <span class="comment">// 获取第一次点击的时间戳</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="actionscript">        <span class="comment">// console.log('再按一次退出应用');</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="actionscript">        plus.nativeUI.toast(<span class="string">"双击退出"</span>, &#123;duration:<span class="string">'short'</span>&#125;); <span class="comment">// 通过 H5+ API 调用 Android 上的toast 提示框</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="actionscript">        setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="actionscript">          first = <span class="literal">null</span>;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        &#125;, 1000);</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="actionscript">      &#125; <span class="keyword">else</span> &#123;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="javascript">        <span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Date</span>().getTime() - first &lt; <span class="number">1000</span>) &#123; <span class="comment">// 获取第二次点击的时间戳, 两次之差 小于 1000ms 说明1s点击了两次,</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="actionscript">          plus.runtime.quit(); <span class="comment">//退出应用</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="actionscript">    &#125;, <span class="literal">false</span>);</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
         <category>移动端</category>
       </categories>
       <tags>
+        <tag>布局</tag>
         <tag>vue</tag>
         <tag>app</tag>
-        <tag>布局</tag>
       </tags>
   </entry>
   <entry>
@@ -269,8 +367,8 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>布局</tag>
         <tag>css</tag>
+        <tag>布局</tag>
       </tags>
   </entry>
   <entry>
@@ -404,15 +502,14 @@
 <h3 id="侧边栏推荐阅读"><a href="#侧边栏推荐阅读" class="headerlink" title="侧边栏推荐阅读"></a>侧边栏推荐阅读</h3><p>打开主题配置文件修改成这样就行了(links里面写你想要的链接):</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Blogrolls</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">links_title:</span> <span class="string">推荐阅读</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">#links_layout: block</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">links_layout:</span> <span class="string">inline</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">links:</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="string">花瓣:</span> <span class="string">https://huaban.com/</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="string">Web前端导航:</span> <span class="string">http://www.alloyteam.com/nav/</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="string">思否:</span> <span class="string">https://segmentfault.com/</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">stack overflow:</span> <span class="string">http://stackoverflow.com/</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="string">掘金:</span> <span class="string">https://juejin.im/</span></span></pre></td></tr></table></figure>
 
-<h3 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h3><p>安装hexo-generator-searchdb，在站点的根目录下执行以下命令：</p>
+<h3 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h3><p>安装 <code>hexo-generator-searchdb</code>，在站点的根目录下执行以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span></pre></td></tr></table></figure>
 
-<p>再网站配置文件 config 增加：</p>
+<p>在网站配置文件 config 增加：</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">search:</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">limit:</span> <span class="number">10000</span></span></pre></td></tr></table></figure>
 
-<p>修改主题配置文件config：</p>
+<p>最后修改主题配置文件 config：</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">unescape:</span> <span class="literal">false</span></span></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>web</category>

@@ -59,7 +59,7 @@
 <meta property="og:site_name" content="飞舟实验室">
 <meta property="og:description" content="基本使用Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown 解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 hexo 安装首先确保电脑已经安装了 nodejs 和 git，如果没有安装请先安装后再执行以下操作。 1npm install hexo-cli -g # 脚手架2hexo init myBlog # 创建项目3cd myBlog # 进入目录4npm in">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-29T05:34:44.354Z">
+<meta property="og:updated_time" content="2019-11-29T08:04:47.987Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.faychou.cn/web/newblogbuildingsummary/">
@@ -250,7 +250,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 13:34:44" itemprop="dateModified" datetime="2019-11-29T13:34:44+08:00">2019-11-29</time>
+                <time title="修改时间：2019-11-29 16:04:47" itemprop="dateModified" datetime="2019-11-29T16:04:47+08:00">2019-11-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,6 +265,7 @@
             </span>
 
           
+          <!--
             <span id="/web/newblogbuildingsummary/" class="post-meta-item leancloud_visitors" data-flag-title="新博客的搭建" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -272,6 +273,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span class="leancloud-visitors-count"></span>
             </span>
+          -->
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -417,15 +419,14 @@
 <h3 id="侧边栏推荐阅读"><a href="#侧边栏推荐阅读" class="headerlink" title="侧边栏推荐阅读"></a>侧边栏推荐阅读</h3><p>打开主题配置文件修改成这样就行了(links里面写你想要的链接):</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Blogrolls</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="attr">links_title:</span> <span class="string">推荐阅读</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#links_layout: block</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="attr">links_layout:</span> <span class="string">inline</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="attr">links:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="string">花瓣:</span> <span class="string">https://huaban.com/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="string">Web前端导航:</span> <span class="string">http://www.alloyteam.com/nav/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="string">思否:</span> <span class="string">https://segmentfault.com/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="attr">stack overflow:</span> <span class="string">http://stackoverflow.com/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="string">掘金:</span> <span class="string">https://juejin.im/</span></span></pre></td></tr></table></figure>
 
-<h3 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h3><p>安装hexo-generator-searchdb，在站点的根目录下执行以下命令：</p>
+<h3 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h3><p>安装 <code>hexo-generator-searchdb</code>，在站点的根目录下执行以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span></pre></td></tr></table></figure>
 
-<p>再网站配置文件 config 增加：</p>
+<p>在网站配置文件 config 增加：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="attr">limit:</span> <span class="number">10000</span></span></pre></td></tr></table></figure>
 
-<p>修改主题配置文件config：</p>
+<p>最后修改主题配置文件 config：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="attr">unescape:</span> <span class="literal">false</span></span></pre></td></tr></table></figure>
-
 
     </div>
 
@@ -530,20 +531,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
