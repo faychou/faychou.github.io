@@ -51,15 +51,15 @@
   };
 </script>
 
-  <meta name="description" content="nodejs 安装MySQL 安装MongoDB 安装Nginx 安装Git 安装第一种安装方法、使用 git 源码编译安装： 1# 安装依赖2yum -y install gcc zlib-devel openssl-devel cpio expat-devel gettext-devel curl-devel perl-ExtUtils-CBuilder perl-ExtUtils-MakeM">
+  <meta name="description" content="nodejs 安装MySQL 安装MongoDB 安装Nginx 安装">
 <meta name="keywords" content="Linux,CentOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在centOS7下配置环境">
 <meta property="og:url" content="https:&#x2F;&#x2F;www.faychou.cn&#x2F;Linux&#x2F;peizhicentoshuanjing&#x2F;">
 <meta property="og:site_name" content="飞舟实验室">
-<meta property="og:description" content="nodejs 安装MySQL 安装MongoDB 安装Nginx 安装Git 安装第一种安装方法、使用 git 源码编译安装： 1# 安装依赖2yum -y install gcc zlib-devel openssl-devel cpio expat-devel gettext-devel curl-devel perl-ExtUtils-CBuilder perl-ExtUtils-MakeM">
+<meta property="og:description" content="nodejs 安装MySQL 安装MongoDB 安装Nginx 安装">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-29T08:23:11.279Z">
+<meta property="og:updated_time" content="2019-12-09T17:33:07.202Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.faychou.cn/Linux/peizhicentoshuanjing/">
@@ -242,10 +242,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-11-29 15:27:20 / 修改时间：16:23:11" itemprop="dateCreated datePublished" datetime="2019-11-29T15:27:20+08:00">2019-11-29</time>
+              <time title="创建时间：2019-11-29 15:27:20" itemprop="dateCreated datePublished" datetime="2019-11-29T15:27:20+08:00">2019-11-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-10 01:33:07" itemprop="dateModified" datetime="2019-12-10T01:33:07+08:00">2019-12-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -285,7 +291,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="nodejs-安装"><a href="#nodejs-安装" class="headerlink" title="nodejs 安装"></a>nodejs 安装</h3><h3 id="MySQL-安装"><a href="#MySQL-安装" class="headerlink" title="MySQL 安装"></a>MySQL 安装</h3><h3 id="MongoDB-安装"><a href="#MongoDB-安装" class="headerlink" title="MongoDB 安装"></a>MongoDB 安装</h3><h3 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h3><h3 id="Git-安装"><a href="#Git-安装" class="headerlink" title="Git 安装"></a>Git 安装</h3><p>第一种安装方法、使用 git 源码编译安装：</p>
+        <h3 id="nodejs-安装"><a href="#nodejs-安装" class="headerlink" title="nodejs 安装"></a>nodejs 安装</h3><h3 id="MySQL-安装"><a href="#MySQL-安装" class="headerlink" title="MySQL 安装"></a>MySQL 安装</h3><h3 id="MongoDB-安装"><a href="#MongoDB-安装" class="headerlink" title="MongoDB 安装"></a>MongoDB 安装</h3><h3 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h3><a id="more"></a>
+
+<h3 id="Git-安装"><a href="#Git-安装" class="headerlink" title="Git 安装"></a>Git 安装</h3><p>第一种安装方法、使用 git 源码编译安装：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装依赖</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">yum -y install gcc zlib-devel openssl-devel cpio expat-devel gettext-devel curl-devel perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载 git</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">wget https://github.com/git/git/archive/v2.14.1.zip</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解压 git</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">unzip v2.14.1.zip</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先进入 git-2.14.1 文件夹</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> git-2.14.1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">make prefix=/usr/<span class="built_in">local</span> all</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">make prefix=/usr/<span class="built_in">local</span> install</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证是否安装完成，如果返回一个版本号就说明安装成功</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">git --version</span></pre></td></tr></table></figure>
 
 <p>第二种安装方法、使用 yum 安装（推荐 CentOS7 以上采用这个方式）：</p>
