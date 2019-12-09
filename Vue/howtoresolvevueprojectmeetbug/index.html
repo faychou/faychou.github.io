@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="飞舟实验室" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="响应式修改数据 基本数据类型直接修改； 数组只能通过以下方法修改： push() pop() shift() unshift() splice() sort() reverse() 使用新数组替换旧数组（map、filter、concat、slice） Vue.set(vm.items, indexOfItem, newValue) vm.items.splice(indexOfItem, 1,">
+<meta name="keywords" content="Vue,Bugs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在vue项目中遇到的bug">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.faychou.cn&#x2F;Vue&#x2F;howtoresolvevueprojectmeetbug&#x2F;">
+<meta property="og:site_name" content="飞舟实验室">
+<meta property="og:description" content="响应式修改数据 基本数据类型直接修改； 数组只能通过以下方法修改： push() pop() shift() unshift() splice() sort() reverse() 使用新数组替换旧数组（map、filter、concat、slice） Vue.set(vm.items, indexOfItem, newValue) vm.items.splice(indexOfItem, 1,">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;6bdc6680gy1g9ho5giwcij20nn0fb74p.jpg">
+<meta property="og:updated_time" content="2019-12-09T17:02:59.097Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;6bdc6680gy1g9ho5giwcij20nn0fb74p.jpg">
+
+<link rel="canonical" href="https://www.faychou.cn/Vue/howtoresolvevueprojectmeetbug/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>在vue项目中遇到的bug | 飞舟实验室</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2d27f3b5e1aed1ccbbeb0dc031332ac5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <!-- <div class="headband"></div> -->
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">飞舟实验室</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+    <!-- 副标题
+        <p class="site-subtitle">web 开发</p>
+    -->
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i><span>首页</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i><span>标签</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i><span>分类</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i><span>归档</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/Vue/howtoresolvevueprojectmeetbug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="飞舟">
+      <meta itemprop="description" content="分享web前端开发技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飞舟实验室">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在vue项目中遇到的bug
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-29 15:16:52" itemprop="dateCreated datePublished" datetime="2019-11-29T15:16:52+08:00">2019-11-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-10 01:02:59" itemprop="dateModified" datetime="2019-12-10T01:02:59+08:00">2019-12-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+            </span>
+
+          
+          <!--
+            <span id="/Vue/howtoresolvevueprojectmeetbug/" class="post-meta-item leancloud_visitors" data-flag-title="在vue项目中遇到的bug" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          -->
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="响应式修改数据"><a href="#响应式修改数据" class="headerlink" title="响应式修改数据"></a>响应式修改数据</h3><ul>
+<li>基本数据类型直接修改；</li>
+<li>数组只能通过以下方法修改：<ul>
+<li><code>push()</code></li>
+<li><code>pop()</code></li>
+<li><code>shift()</code></li>
+<li><code>unshift()</code></li>
+<li><code>splice()</code></li>
+<li><code>sort()</code></li>
+<li><code>reverse()</code></li>
+<li>使用新数组替换旧数组（map、filter、concat、slice）</li>
+<li><code>Vue.set(vm.items, indexOfItem, newValue)</code></li>
+<li><code>vm.items.splice(indexOfItem, 1, newValue)</code></li>
+</ul>
+</li>
+<li>对象变更<ul>
+<li><code>Vue.set(object, propertyName, value)</code></li>
+<li><code>vm.user = Object.assign({}, vm.user, {  age: 27})</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h3><p>对后台返回的数据进行处理，比如统一添加一个是否选中的字段：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">arr = arr.map(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  item.isChecked = <span class="literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> item</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<h3 id="类似详情页回到列表页"><a href="#类似详情页回到列表页" class="headerlink" title="类似详情页回到列表页"></a>类似详情页回到列表页</h3><p>从列表页点击进入详情页后，再从详情页返回列表页时，会回到页面的顶部，并且数据会重新初始化，这是因为组件被销毁然后又重新创建，要想保持原来的滚动位置，就需要利用 <code>keep-alive</code> 组件。</p>
+<p>首先在列表页的视图外套上 <code>keep-alive</code> ,利用 <code>include</code> 属性只对列表组件进行缓存：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">include</span>=<span class="string">'List'</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>然后，在 List 组件内，使用组件内的路由导航守卫 <code>beforeRouteLeave</code> ，在路由离开前，获取滚动高度，并记录在 data 中，当再次进入首页，判断是否存在这个滚动高度，若存在，则设置高度，否则置为 0 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">data:&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    listScrollTop : <span class="number">0</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">beforeRouteLeave (to, <span class="keyword">from</span>, next) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// console.log('leave')</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">let</span> app = <span class="built_in">document</span>.getElementById(<span class="string">'app'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.listScrollTop = app.scrollTop</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  next()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">activated() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'activated home'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'app'</span>).scrollTop = <span class="keyword">this</span>.homeTop || <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;,</span></pre></td></tr></table></figure>
+
+<h3 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fd = <span class="keyword">new</span> FormData(); <span class="comment">// 创建 form 对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">fd.append(<span class="string">'data'</span>, e.target.files[<span class="number">0</span>]); <span class="comment">// 通过 append 向 form 对象添加数据  </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">fd.append(<span class="string">'userId'</span>, <span class="number">001</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">axios(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  method: <span class="string">'POST'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  url: <span class="string">'/upload'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  data: fd,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  headers: &#123;<span class="string">'Content-Type'</span>:<span class="string">'multipart/form-data'</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<h3 id="如何引入element-ui"><a href="#如何引入element-ui" class="headerlink" title="如何引入element ui"></a>如何引入element ui</h3><p><a href="">点击这里查看详情</a></p>
+<h3 id="如何在-vue-中封装-axios"><a href="#如何在-vue-中封装-axios" class="headerlink" title="如何在 vue 中封装 axios"></a>如何在 vue 中封装 axios</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// http.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">'qs'</span> <span class="comment">// 引入qs模块，用来序列化post类型的数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Message &#125; <span class="keyword">from</span> <span class="string">'element-ui'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'../router'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'../store/index'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据环境切换 baseURL</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">axios.defaults.baseURL = process.env.BASE_URL</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置请求超时</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">axios.defaults.timeout = <span class="number">10000</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// post 默认请求头设置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">axios.defaults.headers.post[<span class="string">'Content-Type'</span>] = <span class="string">'application/x-www-form-urlencoded;charset=UTF-8'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求拦截</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">axios.interceptors.request.use(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  config =&gt; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 从 store 中获取 token 并添加到请求头，后台根据 token 判断你的登录情况</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">const</span> token = store.getters.userInfo.token</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    token &amp;&amp; (config.headers[<span class="string">'Authorization'</span>] = token)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 显示 loading</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    store.dispatch(<span class="string">'changeGlobalState'</span>, &#123; <span class="attr">loading</span>: <span class="literal">true</span> &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> config</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">  error =&gt; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">  &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 响应拦截</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">axios.interceptors.response.use(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">  response =&gt; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 隐藏 loading</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    store.dispatch(<span class="string">'changeGlobalState'</span>, &#123; <span class="attr">loading</span>: <span class="literal">false</span> &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> response</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 这里可以跟你们的后台开发人员协商好统一的错误状态码    </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 然后根据返回的状态码进行一些操作，例如登录过期提示，错误提示等等</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">  error =&gt; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (error.response.status) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">switch</span> (error.response.status) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 401: 未登录</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 未登录则跳转登录页面，并携带当前页面的路径</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 在登录成功后返回当前页面，这一步需要在登录页操作。                </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">case</span> <span class="number">401</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">          Message(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">            message: <span class="string">'请先登录'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">            type: <span class="string">'warning'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">          &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">          <span class="keyword">return</span> router.replace(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">            path: <span class="string">'/login'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">            query: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">              redirect: router.currentRoute.fullPath</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">          &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 403 token 过期</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 登录过期对用户进行提示</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 清除 vuex 中 token</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 跳转登录页面                </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">case</span> <span class="number">403</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">          Message(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">            message: <span class="string">'登录过期，请重新登录'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">            type: <span class="string">'warning'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">          &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">          store.commit(<span class="string">'loginFail'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">          <span class="comment">// 跳转登录页面，并将要浏览的页面fullPath传过去，登录成功后跳转需要访问的页面 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">          setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">            router.replace(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line">              path: <span class="string">'/login'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line">              query: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">                redirect: router.currentRoute.fullPath</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line">              &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line">            &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line">          &#125;, <span class="number">1000</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">          <span class="keyword">return</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 404请求不存在</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">case</span> <span class="number">404</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line">          <span class="keyword">return</span> message(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">85</span></pre></td><td class="code"><pre><span class="line">            message: <span class="string">'网络请求不存在'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">86</span></pre></td><td class="code"><pre><span class="line">            type: <span class="string">'warning'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">87</span></pre></td><td class="code"><pre><span class="line">          &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">88</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 其他错误，直接抛出错误提示</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">89</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">default</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">90</span></pre></td><td class="code"><pre><span class="line">          message(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">91</span></pre></td><td class="code"><pre><span class="line">            message: error.response.data.message,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">92</span></pre></td><td class="code"><pre><span class="line">            type: <span class="string">'warning'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">93</span></pre></td><td class="code"><pre><span class="line">          &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">94</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">95</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error.response)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">96</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">97</span></pre></td><td class="code"><pre><span class="line">  &#125;    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">98</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<h3 id="Vue-组件缓存"><a href="#Vue-组件缓存" class="headerlink" title="Vue 组件缓存"></a>Vue 组件缓存</h3><p>使用 <code>keep-alive</code> 包裹「动态组件」时，会缓存不活动的组件实例，而不是销毁它们。这样就可以保留组件的状态。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">component</span> <span class="attr">v-bind:is</span>=<span class="string">"currentTabComponent"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>同时 <code>&lt;keep-alive&gt;</code> 提供了两个属性 <code>include</code> 与 <code>exclude</code>：</p>
+<ul>
+<li><code>include</code>：只有名称匹配的组件会被缓存。</li>
+<li><code>exclude</code>：任何名称匹配的组件都不会被缓存。</li>
+</ul>
+<p>两个属性都可以用逗号分隔字符串、正则表达式或一个数组来表示。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">include</span>=<span class="string">"a,b"</span>&gt;</span><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">:include</span>=<span class="string">"/a|b/"</span>&gt;</span><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">:include</span>=<span class="string">"['a', 'b']"</span>&gt;</span><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h3 id="动态组件切换后不会再次触发-created"><a href="#动态组件切换后不会再次触发-created" class="headerlink" title="动态组件切换后不会再次触发 created"></a>动态组件切换后不会再次触发 created</h3><p>由于通过 <code>&lt;keep-alive&gt;</code> 缓存组件后，vue 不会销毁再创建组件，而是复用这个组件。就会导致 <code>created</code>、<code>mounted</code> 等生命周期不会被触发，当第二次进入该组件时就不会再去获取数据勒，所以可以增加 <code>activated</code>函数，每次进入该组件的时候再获取一次数据。</p>
+<p>动态路由也会涉及到这个问题，例如从 <code>/user/foo</code> 导航到 <code>/user/bar</code>，原来的组件实例会被复用。解决的办法是在组件内部利用 watch 来监听 <code>$route</code>  的变化。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">watch: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  $route (to,<span class="keyword">from</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">     <span class="comment">// to 表示的是你要去的那个组件，from 表示的是你从哪个组件过来的</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(to, <span class="keyword">from</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>或者使用组件内的 <code>beforeRouteUpdate</code> 导航守卫：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> User = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  template: <span class="string">'...'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  beforeRouteUpdate (to, <span class="keyword">from</span>, next) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 在当前路由改变时调用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 注意不要忘记调用 next()</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="关于刷新导致-vuex-清空"><a href="#关于刷新导致-vuex-清空" class="headerlink" title="关于刷新导致  vuex 清空"></a>关于刷新导致  vuex 清空</h3><p>修改 store 中 state 的定义：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  state: sessionStorage.getItem(<span class="string">'state'</span>) ? <span class="built_in">JSON</span>.parse(sessionStorage.getItem(<span class="string">'state'</span>)): &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    token:<span class="string">''</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<p>其次是子路由的数据一定要从当前路由中获取。</p>
+<h3 id="组件-name-的作用"><a href="#组件-name-的作用" class="headerlink" title="组件  name 的作用"></a>组件  name 的作用</h3><p>在定义组件时，有一个可选的 <code>name</code> 选项，看起来可有可无，实际上用处也挺大的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  name: <span class="string">'Home'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>当项目使用 <code>keep-alive</code>时，可搭配组件 <code>name</code> 进行缓存过滤，排除缓存某个组件，从而避免第二次进入该组件后不会调用 <code>created</code> 等生命周期：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">exclude</span>=<span class="string">"Detail"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>或者做多级菜单时，递归迭代组件时需要调用自身 <code>name</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 递归组件是指组件自身调用自身 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"(item,index) in list"</span> <span class="attr">:key</span>=<span class="string">"index"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#123;&#123;item.title&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"item.children"</span> &gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">item-list</span> <span class="attr">:list</span>=<span class="string">"item.children"</span>&gt;</span><span class="tag">&lt;/<span class="name">item-list</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">    name:<span class="string">'ItemList'</span>,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    props:&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">        list:<span class="built_in">Array</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>还有就是 vue-devtools 调试工具里显示的组见名称就是 name。</p>
+<h3 id="Vue-中引入-echarts"><a href="#Vue-中引入-echarts" class="headerlink" title="Vue 中引入 echarts"></a>Vue 中引入 echarts</h3><p><a href="">点击这里查看详情</a></p>
+<h3 id="Vue-引入-字体图标"><a href="#Vue-引入-字体图标" class="headerlink" title="Vue 引入 字体图标"></a>Vue 引入 字体图标</h3><p>第一步，在 <a href="https://www.iconfont.cn/" target="_blank" rel="noopener">iconfont 官网</a> 选图标，加入购物车，并下载代码；</p>
+<p>第二步，在 <code>main.js</code> 中引用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'@/assets/iconfont/iconfont.css'</span></span></pre></td></tr></table></figure>
+
+<p>最后在代码中使用 <code>class=&quot;iconfont icon-XXX&quot;</code> 就可以使用图标了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"iconfont icon-icon-test"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h3 id="如何在-Vue-中引入其他-JS"><a href="#如何在-Vue-中引入其他-JS" class="headerlink" title="如何在 Vue 中引入其他 JS"></a>如何在 Vue 中引入其他 JS</h3><p>直接在入口文件 <code>public/index.html</code> 中全局引入：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./static/jquery-1.12.4.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h3 id="打包时报-console-错误"><a href="#打包时报-console-错误" class="headerlink" title="打包时报 console 错误"></a>打包时报 console 错误</h3><p>运行 <code>npm run build</code> 时，报以下的错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Module Error (from ./node_modules/eslint-loader/index.js):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">error: Unexpected console statement (no-console) at src\App.vue:19:5:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  17 |   &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  18 |   <span class="function"><span class="title">created</span></span>() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&gt; 19 |     console.log(<span class="string">"进入程序"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">     |     ^</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  20 |   &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  21 | &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  22 | &lt;/script&gt;</span></pre></td></tr></table></figure>
+
+<p>大概是说程序中意外的 <code>console.log</code> ，也就是说在打包之前需要移除所有的 <code>console.log</code> ，这个就很坑了，因为不太可能将所有的 <code>console.log</code> 手动删除，太多了，删到天亮都不得行。</p>
+<p>解决办法就是在根目录下新建 <code>vue.config.js</code> 文件，然后加入以下内容：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  configureWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'production'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      config.optimization.minimizer[<span class="number">0</span>].options.terserOptions.compress.drop_console = <span class="literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>如果上诉操作之后还是打包失败，提示移除 <code>console.log</code> ，比较粗暴的方法就是找到根目录下的 <code>./eslintrc.js</code> ，将以下代码删除或者注释即可：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'no-console'</span>: process.env.NODE_ENV === <span class="string">'production'</span> ? <span class="string">'error'</span> : <span class="string">'off'</span>,</span></pre></td></tr></table></figure>
+
+<h3 id="vue-打包后路径问题"><a href="#vue-打包后路径问题" class="headerlink" title="vue 打包后路径问题"></a>vue 打包后路径问题</h3><p>一般情况下通过 <code>npm run build</code> 打包后，直接将 build 文件夹下的所有文件全部丢到后台的静态资源服务器上，就可以正常的访问了。但是开发的事情谁说的准，有时候想要在本地直接预览，或者打包为 APP 的时候，如果直接点击 <code>index.html</code>，打开的网页可能就是一片空白，控制台报一堆的 404。其实这个时候只要看一下打包后的 <code>index.html</code> 文件代码就能知道，所有文件的引入地址都是以<code>/</code>开头的绝对路径，指向 http 服务器的根路径，如下图红色方框所示：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1g9ho5giwcij20nn0fb74p.jpg" alt=""></p>
+<p>要解决这个问题其实也很简单，主要分以下两个方面：</p>
+<p>1、解决资源引入错误问题：</p>
+<p>在 <code>vue.config.js</code> 中设置 <code>publicPath: &#39;./&#39;</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  publicPath: <span class="string">'./'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>这样所有的资源都会被链接为相对路径，这样打出来的包可以被部署在任意路径。</p>
+<p>2、解决图片引入问题：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> img1 <span class="keyword">from</span> <span class="string">'@assets/images/img01.jpg'</span></span></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/reward/wechatpay.jpg" alt="飞舟 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/reward/alipay.jpg" alt="飞舟 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+        <div>
+          
+            
+          
+        </div>
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+              <a href="/tags/Bugs/" rel="tag"># Bugs</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/Ajax/axiossendpostandjavareceive/" rel="next" title="axios发送post请求java后端无法拿到数据">
+                  <i class="fa fa-chevron-left"></i> axios发送post请求java后端无法拿到数据
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/Linux/peizhicentoshuanjing/" rel="prev" title="如何在centOS7下配置环境">
+                  如何在centOS7下配置环境 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#响应式修改数据"><span class="nav-number">1.</span> <span class="nav-text">响应式修改数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据处理"><span class="nav-number">2.</span> <span class="nav-text">数据处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类似详情页回到列表页"><span class="nav-number">3.</span> <span class="nav-text">类似详情页回到列表页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片上传"><span class="nav-number">4.</span> <span class="nav-text">图片上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何引入element-ui"><span class="nav-number">5.</span> <span class="nav-text">如何引入element ui</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何在-vue-中封装-axios"><span class="nav-number">6.</span> <span class="nav-text">如何在 vue 中封装 axios</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-组件缓存"><span class="nav-number">7.</span> <span class="nav-text">Vue 组件缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态组件切换后不会再次触发-created"><span class="nav-number">8.</span> <span class="nav-text">动态组件切换后不会再次触发 created</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于刷新导致-vuex-清空"><span class="nav-number">9.</span> <span class="nav-text">关于刷新导致  vuex 清空</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件-name-的作用"><span class="nav-number">10.</span> <span class="nav-text">组件  name 的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-中引入-echarts"><span class="nav-number">11.</span> <span class="nav-text">Vue 中引入 echarts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-引入-字体图标"><span class="nav-number">12.</span> <span class="nav-text">Vue 引入 字体图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何在-Vue-中引入其他-JS"><span class="nav-number">13.</span> <span class="nav-text">如何在 Vue 中引入其他 JS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包时报-console-错误"><span class="nav-number">14.</span> <span class="nav-text">打包时报 console 错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vue-打包后路径问题"><span class="nav-number">15.</span> <span class="nav-text">vue 打包后路径问题</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="飞舟"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">飞舟</p>
+  <div class="site-description" itemprop="description">分享web前端开发技术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/faychou" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;faychou" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fay_chou@163.com" title="E-Mail → mailto:fay_chou@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/handsomefay" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;handsomefay" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<section class="about">
+  <h3>关于</h3>
+  <p>热爱前端开发，热爱前端开发带来的乐趣和挑战，也正在全栈开发的路上越走越远！</p>
+</section>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DESIGN BY 飞舟</span>
+  <span class="post-meta-divider">|</span>
+  备案号：<a>蜀ICP备16030214号-2</a>
+  <span class="post-meta-divider">|</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+-->
+
+<!--
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=BIiHt3bUjfL5ahD8Lwv0K68M-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'BIiHt3bUjfL5ahD8Lwv0K68M-gzGzoHsz',
+            'X-LC-Key': 'OEOGKKUYLCQyiKtByHWiXVal',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
