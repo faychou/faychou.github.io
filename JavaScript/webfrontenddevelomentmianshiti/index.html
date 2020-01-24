@@ -51,15 +51,15 @@
   };
 </script>
 
-  <meta name="description" content="HTML请说说浏览器的缓存策略CSSJavaScript请讲一下 JavaScript 的执行过程。作用域链与引用类型V8 引擎的回收机制Event LoopVue题：请你说一下 Vue 的设计架构。vue2 采用的是典型的混入式架构，类似于 express 和 jquery，各个部分分模块开发，再通过一个 mixin 去混入到最终暴露到全局的类上。 Vue3 已经发布了，请你说一下与 Vue2">
+  <meta name="description" content="HTML请说说浏览器的缓存策略HTTP从输入网址到看到页面经历了哪些步骤TCP三次握手 CSS布局两列布局、三列布局 有哪些浏览器端的兼容问题IE6双倍外边距、margin重叠。。。 JavaScript请讲一下 JavaScript 的执行过程。作用域链与引用类型this、newV8 引擎的回收机制深拷贝、浅拷贝Event Loop分为：浏览器端 Event Loop、nodeJS 的 Even">
 <meta name="keywords" content="面试题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端面试题精选">
 <meta property="og:url" content="https:&#x2F;&#x2F;www.faychou.cn&#x2F;JavaScript&#x2F;webfrontenddevelomentmianshiti&#x2F;">
 <meta property="og:site_name" content="飞舟实验室">
-<meta property="og:description" content="HTML请说说浏览器的缓存策略CSSJavaScript请讲一下 JavaScript 的执行过程。作用域链与引用类型V8 引擎的回收机制Event LoopVue题：请你说一下 Vue 的设计架构。vue2 采用的是典型的混入式架构，类似于 express 和 jquery，各个部分分模块开发，再通过一个 mixin 去混入到最终暴露到全局的类上。 Vue3 已经发布了，请你说一下与 Vue2">
+<meta property="og:description" content="HTML请说说浏览器的缓存策略HTTP从输入网址到看到页面经历了哪些步骤TCP三次握手 CSS布局两列布局、三列布局 有哪些浏览器端的兼容问题IE6双倍外边距、margin重叠。。。 JavaScript请讲一下 JavaScript 的执行过程。作用域链与引用类型this、newV8 引擎的回收机制深拷贝、浅拷贝Event Loop分为：浏览器端 Event Loop、nodeJS 的 Even">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-09T08:14:31.980Z">
+<meta property="og:updated_time" content="2019-12-16T16:16:27.582Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.faychou.cn/JavaScript/webfrontenddevelomentmianshiti/">
@@ -242,10 +242,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-12-09 12:22:57 / 修改时间：16:14:31" itemprop="dateCreated datePublished" datetime="2019-12-09T12:22:57+08:00">2019-12-09</time>
+              <time title="创建时间：2019-12-09 12:22:57" itemprop="dateCreated datePublished" datetime="2019-12-09T12:22:57+08:00">2019-12-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-17 00:16:27" itemprop="dateModified" datetime="2019-12-17T00:16:27+08:00">2019-12-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -285,12 +291,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="请说说浏览器的缓存策略"><a href="#请说说浏览器的缓存策略" class="headerlink" title="请说说浏览器的缓存策略"></a>请说说浏览器的缓存策略</h3><h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="请讲一下-JavaScript-的执行过程。"><a href="#请讲一下-JavaScript-的执行过程。" class="headerlink" title="请讲一下 JavaScript 的执行过程。"></a>请讲一下 JavaScript 的执行过程。</h3><h3 id="作用域链与引用类型"><a href="#作用域链与引用类型" class="headerlink" title="作用域链与引用类型"></a>作用域链与引用类型</h3><h3 id="V8-引擎的回收机制"><a href="#V8-引擎的回收机制" class="headerlink" title="V8 引擎的回收机制"></a>V8 引擎的回收机制</h3><h3 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h3><h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><h3 id="题：请你说一下-Vue-的设计架构。"><a href="#题：请你说一下-Vue-的设计架构。" class="headerlink" title="题：请你说一下 Vue 的设计架构。"></a>题：请你说一下 Vue 的设计架构。</h3><p>vue2 采用的是典型的混入式架构，类似于 express 和 jquery，各个部分分模块开发，再通过一个 mixin 去混入到最终暴露到全局的类上。</p>
+        <h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="请说说浏览器的缓存策略"><a href="#请说说浏览器的缓存策略" class="headerlink" title="请说说浏览器的缓存策略"></a>请说说浏览器的缓存策略</h3><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><h3 id="从输入网址到看到页面经历了哪些步骤"><a href="#从输入网址到看到页面经历了哪些步骤" class="headerlink" title="从输入网址到看到页面经历了哪些步骤"></a>从输入网址到看到页面经历了哪些步骤</h3><p>TCP三次握手</p>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><p>两列布局、三列布局</p>
+<h3 id="有哪些浏览器端的兼容问题"><a href="#有哪些浏览器端的兼容问题" class="headerlink" title="有哪些浏览器端的兼容问题"></a>有哪些浏览器端的兼容问题</h3><p>IE6双倍外边距、margin重叠。。。</p>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="请讲一下-JavaScript-的执行过程。"><a href="#请讲一下-JavaScript-的执行过程。" class="headerlink" title="请讲一下 JavaScript 的执行过程。"></a>请讲一下 JavaScript 的执行过程。</h3><h3 id="作用域链与引用类型"><a href="#作用域链与引用类型" class="headerlink" title="作用域链与引用类型"></a>作用域链与引用类型</h3><h3 id="this、new"><a href="#this、new" class="headerlink" title="this、new"></a>this、new</h3><h3 id="V8-引擎的回收机制"><a href="#V8-引擎的回收机制" class="headerlink" title="V8 引擎的回收机制"></a>V8 引擎的回收机制</h3><h3 id="深拷贝、浅拷贝"><a href="#深拷贝、浅拷贝" class="headerlink" title="深拷贝、浅拷贝"></a>深拷贝、浅拷贝</h3><h3 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h3><p>分为：浏览器端 Event Loop、nodeJS 的 Event Loop</p>
+<h3 id="原型、原型链"><a href="#原型、原型链" class="headerlink" title="原型、原型链"></a>原型、原型链</h3><h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><h3 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h3><p>回调函数、Promise、async/await</p>
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><h3 id="题：请你说一下-Vue-的设计架构。"><a href="#题：请你说一下-Vue-的设计架构。" class="headerlink" title="题：请你说一下 Vue 的设计架构。"></a>题：请你说一下 Vue 的设计架构。</h3><p>vue2 采用的是典型的混入式架构，类似于 express 和 jquery，各个部分分模块开发，再通过一个 mixin 去混入到最终暴露到全局的类上。</p>
 <h3 id="Vue3-已经发布了，请你说一下与-Vue2-在响应式的实现上有什么区别？"><a href="#Vue3-已经发布了，请你说一下与-Vue2-在响应式的实现上有什么区别？" class="headerlink" title="Vue3 已经发布了，请你说一下与 Vue2 在响应式的实现上有什么区别？"></a>Vue3 已经发布了，请你说一下与 Vue2 在响应式的实现上有什么区别？</h3><p>Vue2 采用的是 defineProperty 定义 get 与 set，而 Vue3 改用了 proxy。</p>
+<h3 id="virtual-DOM-原理"><a href="#virtual-DOM-原理" class="headerlink" title="virtual DOM 原理"></a>virtual DOM 原理</h3><h2 id="小程序"><a href="#小程序" class="headerlink" title="小程序"></a>小程序</h2><h3 id="登录流程"><a href="#登录流程" class="headerlink" title="登录流程"></a>登录流程</h3><h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="SPA-首屏优化"><a href="#SPA-首屏优化" class="headerlink" title="SPA 首屏优化"></a>SPA 首屏优化</h3><h3 id="图片加载"><a href="#图片加载" class="headerlink" title="图片加载"></a>图片加载</h3><p>懒加载、预加载、骨架屏</p>
 <h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><h3 id="请说一下你在这个项目中做的事情。"><a href="#请说一下你在这个项目中做的事情。" class="headerlink" title="请说一下你在这个项目中做的事情。"></a>请说一下你在这个项目中做的事情。</h3><p>【思路】：ssr、组件库、工程化建设、移动混合方案、性能优化方案。</p>
 <p>这个项目主体是一个 Vue 项目，但是因为是 PC 端，为了 seo，我特意做了 ssr。然后这个项目有一套我和同事一起做的一个组件库。</p>
 <p>在移动端，为了搭配 App，也做了移动混合方案。像在首页，因为数据量大，我们采用了一些优化方案，利用本地存储缓存数据，对小图片进行了 base64 的转码。</p>
-
+<h3 id="说说你在项目中遇到的映像比较深刻的问题？"><a href="#说说你在项目中遇到的映像比较深刻的问题？" class="headerlink" title="说说你在项目中遇到的映像比较深刻的问题？"></a>说说你在项目中遇到的映像比较深刻的问题？</h3><h3 id="你如何管理好团队"><a href="#你如何管理好团队" class="headerlink" title="你如何管理好团队"></a>你如何管理好团队</h3><h3 id="你最擅长的技术"><a href="#你最擅长的技术" class="headerlink" title="你最擅长的技术"></a>你最擅长的技术</h3><h3 id="有没有自己封装过组件、能看一下源码吗？"><a href="#有没有自己封装过组件、能看一下源码吗？" class="headerlink" title="有没有自己封装过组件、能看一下源码吗？"></a>有没有自己封装过组件、能看一下源码吗？</h3>
     </div>
 
     
@@ -380,7 +392,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请说说浏览器的缓存策略"><span class="nav-number">1.1.</span> <span class="nav-text">请说说浏览器的缓存策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS"><span class="nav-number">2.</span> <span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript"><span class="nav-number">3.</span> <span class="nav-text">JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请讲一下-JavaScript-的执行过程。"><span class="nav-number">3.1.</span> <span class="nav-text">请讲一下 JavaScript 的执行过程。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域链与引用类型"><span class="nav-number">3.2.</span> <span class="nav-text">作用域链与引用类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#V8-引擎的回收机制"><span class="nav-number">3.3.</span> <span class="nav-text">V8 引擎的回收机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Loop"><span class="nav-number">3.4.</span> <span class="nav-text">Event Loop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue"><span class="nav-number">4.</span> <span class="nav-text">Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题：请你说一下-Vue-的设计架构。"><span class="nav-number">4.1.</span> <span class="nav-text">题：请你说一下 Vue 的设计架构。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue3-已经发布了，请你说一下与-Vue2-在响应式的实现上有什么区别？"><span class="nav-number">4.2.</span> <span class="nav-text">Vue3 已经发布了，请你说一下与 Vue2 在响应式的实现上有什么区别？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目"><span class="nav-number">5.</span> <span class="nav-text">项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请说一下你在这个项目中做的事情。"><span class="nav-number">5.1.</span> <span class="nav-text">请说一下你在这个项目中做的事情。</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请说说浏览器的缓存策略"><span class="nav-number">1.1.</span> <span class="nav-text">请说说浏览器的缓存策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从输入网址到看到页面经历了哪些步骤"><span class="nav-number">1.3.</span> <span class="nav-text">从输入网址到看到页面经历了哪些步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS"><span class="nav-number">2.</span> <span class="nav-text">CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#布局"><span class="nav-number">2.1.</span> <span class="nav-text">布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有哪些浏览器端的兼容问题"><span class="nav-number">2.2.</span> <span class="nav-text">有哪些浏览器端的兼容问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript"><span class="nav-number">3.</span> <span class="nav-text">JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请讲一下-JavaScript-的执行过程。"><span class="nav-number">3.1.</span> <span class="nav-text">请讲一下 JavaScript 的执行过程。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域链与引用类型"><span class="nav-number">3.2.</span> <span class="nav-text">作用域链与引用类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this、new"><span class="nav-number">3.3.</span> <span class="nav-text">this、new</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#V8-引擎的回收机制"><span class="nav-number">3.4.</span> <span class="nav-text">V8 引擎的回收机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深拷贝、浅拷贝"><span class="nav-number">3.5.</span> <span class="nav-text">深拷贝、浅拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Loop"><span class="nav-number">3.6.</span> <span class="nav-text">Event Loop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型、原型链"><span class="nav-number">3.7.</span> <span class="nav-text">原型、原型链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">3.8.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式"><span class="nav-number">3.9.</span> <span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步编程"><span class="nav-number">3.10.</span> <span class="nav-text">异步编程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue"><span class="nav-number">4.</span> <span class="nav-text">Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题：请你说一下-Vue-的设计架构。"><span class="nav-number">4.1.</span> <span class="nav-text">题：请你说一下 Vue 的设计架构。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue3-已经发布了，请你说一下与-Vue2-在响应式的实现上有什么区别？"><span class="nav-number">4.2.</span> <span class="nav-text">Vue3 已经发布了，请你说一下与 Vue2 在响应式的实现上有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#virtual-DOM-原理"><span class="nav-number">4.3.</span> <span class="nav-text">virtual DOM 原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小程序"><span class="nav-number">5.</span> <span class="nav-text">小程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#登录流程"><span class="nav-number">5.1.</span> <span class="nav-text">登录流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化"><span class="nav-number">6.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SPA-首屏优化"><span class="nav-number">6.1.</span> <span class="nav-text">SPA 首屏优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片加载"><span class="nav-number">6.2.</span> <span class="nav-text">图片加载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目"><span class="nav-number">7.</span> <span class="nav-text">项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请说一下你在这个项目中做的事情。"><span class="nav-number">7.1.</span> <span class="nav-text">请说一下你在这个项目中做的事情。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说说你在项目中遇到的映像比较深刻的问题？"><span class="nav-number">7.2.</span> <span class="nav-text">说说你在项目中遇到的映像比较深刻的问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你如何管理好团队"><span class="nav-number">7.3.</span> <span class="nav-text">你如何管理好团队</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你最擅长的技术"><span class="nav-number">7.4.</span> <span class="nav-text">你最擅长的技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有没有自己封装过组件、能看一下源码吗？"><span class="nav-number">7.5.</span> <span class="nav-text">有没有自己封装过组件、能看一下源码吗？</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -396,20 +408,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -455,7 +467,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
