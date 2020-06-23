@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>项目中如何解决AJAX跨域的问题？</title>
-    <url>/AJAX/project-ajax-cross/</url>
+    <url>/AJAX/projectajaxcross/</url>
     <content><![CDATA[<p>解决跨域的方案有很多，比如说 <code>JsonP</code>、<code>document.domain</code>、<code>window.name</code>、<code>postMessage</code>、<code>nginx</code>等，本文主要讲一下开发环境下如何配置反向代理实现跨域，注意以下方法仅限于开发环境，生产环境不适用。</p>
 <h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><p>如果当前项目是通过 <code>webpack</code> 来打包的，则可以利用 <code>devServer</code> 来实现反向代理，具体代码如下：</p>
 <a id="more"></a>
@@ -629,7 +629,7 @@
   </entry>
   <entry>
     <title>如何解决 AJAX 跨域</title>
-    <url>/AJAX/ruhejiejueajaxkuayu/</url>
+    <url>/AJAX/resolveajaxcross/</url>
     <content><![CDATA[<p>在开发中有一个无法避免的问题，那就是请求跨域，产生的原因是因为浏览器的“同源策略”，所谓的同源就是指：</p>
 <ul>
 <li>协议，例：http 和 https</li>
