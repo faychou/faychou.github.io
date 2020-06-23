@@ -511,7 +511,7 @@
   </entry>
   <entry>
     <title>axios发送post请求java后端无法拿到数据</title>
-    <url>/Ajax/axiossendpostandjavareceive/</url>
+    <url>/AJAX/axiossendpostandjavareceive/</url>
     <content><![CDATA[<h3 id="场景描述："><a href="#场景描述：" class="headerlink" title="场景描述："></a>场景描述：</h3><p>如果后端是 Java（springmvc），前端使用 jQuery 的 <code>$.ajax</code> 发送 POST 请求，测试接口是没问题的。但是换做使用 axios 来发送 POST 请求，后端却无法获取数据。</p>
 <p>问题的主要原因是后端默认接收的 POST 请求头是 <code>Content-Type</code> 设置为 <code>application/x-www-form-urlencoded</code> 的表单请求，参数形式是 <code>key1=value1&amp;key2=value2</code> 这种形式，后端获取使用 <code>@RequestParam</code> 。jQuery 默认的就是这种请求方式，所以使用 <code>$.ajax</code> 发送请求没有问题。</p>
 <p>而如果发送 POST 请求时不指定请求头 Request Header，默认使用的 <code>Content-Type</code> 是 <code>text/plain;charset=UTF-8</code> 或者 <code>application/json</code> ，参数出现在 Request payload 块，其参数形式是标准的 Json 格式，所以后台还是使用 <code>@RequestParam</code> 就无法获取到参数，就需要改用 <code>@RequestBody</code> 获取。</p>
@@ -538,7 +538,7 @@
 <p>参考文章：<a href="https://blog.csdn.net/zjz_zzzz/article/details/82753472" target="_blank" rel="noopener">https://blog.csdn.net/zjz_zzzz/article/details/82753472</a></p>
 ]]></content>
       <categories>
-        <category>Ajax</category>
+        <category>AJAX</category>
       </categories>
       <tags>
         <tag>axios</tag>
