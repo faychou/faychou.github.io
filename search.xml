@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Linux 下如何部署 node 应用？</title>
-    <url>/CSS/linuxdeploynodewithpm2/</url>
+    <url>/Node/linuxdeploynodewithpm2/</url>
     <content><![CDATA[<p>Node 是一个可以在服务器端运行 JavaScript 的环境，作为一个由前端开发步入后端开发，转变为全栈开发的首选后端语言，相信大家都已经非常的熟悉了。现在有很多项目都会选择 Node 来作为后端开发，初出茅庐的兄弟们都想撸起袖子加油干，其中的坑不少，弯弯也不少，但是最终也还是都能解决。在这些问题当中，也许大家都会遇到这么个问题。开发中，可以直接在终端里运行服务器，然后一直挂着。开发完了，再闭关服务器即可。而项目上线的话，一般是部署在 Linux 系统上，并且是一直都能访问的，如果依旧采用开发环境的方式运行项目，就不能关闭终端，或者闭关自己的电脑，不然服务器就不能访问了，很显然不可能一直开机挂着终端吧。</p>
 <p>其实作为后端出身的一看就知道是怎么回事了，这就是一个进程守护的问题。Node 的解决方案可以使用 Forever 模块来守护进程、监听程序的运行，而今天给大家介绍另一个更加强大的进程管理工具 pm2，该工具除了可以管理 Node 进程外，还能进行性能监控、自动重启和负载均衡，关键是使用上还非常的简单。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>进入系统后，直接全局下安装该工具（前提是已经安装过 Node了）：</p>
@@ -50,7 +50,7 @@
 <p>然后放心大胆的关闭你的终端，pm2 会自动帮你守护 Node 进程，而不用担心服务挂掉了。</p>
 ]]></content>
       <categories>
-        <category>CSS</category>
+        <category>Node</category>
       </categories>
       <tags>
         <tag>Linux</tag>
