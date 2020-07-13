@@ -219,6 +219,108 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/Ajax/axiossendpostandjavareceive/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="飞舟">
+      <meta itemprop="description" content="分享web前端开发技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飞舟实验室">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/Ajax/axiossendpostandjavareceive/" class="post-title-link" itemprop="url">axios发送post请求java后端无法拿到数据</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-29 10:22:19" itemprop="dateCreated datePublished" datetime="2019-11-29T10:22:19+08:00">2019-11-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-13 20:25:48" itemprop="dateModified" datetime="2020-07-13T20:25:48+08:00">2020-07-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ajax/" itemprop="url" rel="index">
+                    <span itemprop="name">Ajax</span>
+                  </a>
+                </span>
+            </span>
+
+          
+          <!--
+            <span id="/Ajax/axiossendpostandjavareceive/" class="post-meta-item leancloud_visitors" data-flag-title="axios发送post请求java后端无法拿到数据" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          -->
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="场景描述："><a href="#场景描述：" class="headerlink" title="场景描述："></a>场景描述：</h3><p>如果后端是 Java（springmvc），前端使用 jQuery 的 <code>$.ajax</code> 发送 POST 请求，测试接口是没问题的。但是换做使用 axios 来发送 POST 请求，后端却无法获取数据。</p>
+<p>问题的主要原因是后端默认接收的 POST 请求头是 <code>Content-Type</code> 设置为 <code>application/x-www-form-urlencoded</code> 的表单请求，参数形式是 <code>key1=value1&amp;key2=value2</code> 这种形式，后端获取使用 <code>@RequestParam</code> 。jQuery 默认的就是这种请求方式，所以使用 <code>$.ajax</code> 发送请求没有问题。</p>
+<p>而如果发送 POST 请求时不指定请求头 Request Header，默认使用的 <code>Content-Type</code> 是 <code>text/plain;charset=UTF-8</code> 或者 <code>application/json</code> ，参数出现在 Request payload 块，其参数形式是标准的 Json 格式，所以后台还是使用 <code>@RequestParam</code> 就无法获取到参数，就需要改用 <code>@RequestBody</code> 获取。</p>
+<p>在 axios 中使用 POST 发送数据时，默认是直接把 Json 放到请求体中提交到后端的，属于上述的第二种方式。</p>
+<h4 id="后端解决方案"><a href="#后端解决方案" class="headerlink" title="后端解决方案"></a>后端解决方案</h4><p>在请求参数使用 <code>@RequestBody</code> 注解替代 <code>@RequestParam</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/save"</span>,method=RequestMethod.POST)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;String, String&gt; <span class="title">save</span><span class="params">(@RequestBody Student student)</span></span></span></pre></td></tr></table></figure>
+
+<h4 id="前端解决方案："><a href="#前端解决方案：" class="headerlink" title="前端解决方案："></a>前端解决方案：</h4><p>如果后台处理不了的话，其实这个问题前端同学完全可以自己解决的，其实就是设置请求头而已，以下给出三种方案：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Ajax/axiossendpostandjavareceive/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="content-item-read">
+          
+        </div>
+        <div></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.faychou.cn/%E7%A7%BB%E5%8A%A8%E7%AB%AF/vuemobileandapp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -250,7 +352,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-10 01:31:15" itemprop="dateModified" datetime="2019-12-10T01:31:15+08:00">2019-12-10</time>
+                <time title="修改时间：2020-07-13 20:26:16" itemprop="dateModified" datetime="2020-07-13T20:26:16+08:00">2020-07-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -466,7 +568,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 14:26:55" itemprop="dateModified" datetime="2019-11-29T14:26:55+08:00">2019-11-29</time>
+                <time title="修改时间：2020-07-13 20:26:10" itemprop="dateModified" datetime="2020-07-13T20:26:10+08:00">2020-07-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -572,7 +674,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-09 00:42:00" itemprop="dateModified" datetime="2019-12-09T00:42:00+08:00">2019-12-09</time>
+                <time title="修改时间：2020-07-13 20:26:29" itemprop="dateModified" datetime="2020-07-13T20:26:29+08:00">2020-07-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -670,7 +772,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 14:32:23" itemprop="dateModified" datetime="2019-11-29T14:32:23+08:00">2019-11-29</time>
+                <time title="修改时间：2020-07-13 20:25:55" itemprop="dateModified" datetime="2020-07-13T20:25:55+08:00">2020-07-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -790,7 +892,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -803,7 +905,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
