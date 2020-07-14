@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>有了Vue和Nginx还需要Node吗？</title>
+    <url>/Node/vueandnginxornginx/</url>
+    <content><![CDATA[<p>首先我们先要弄懂这三者各是干什么的，这样就能知道在什么场景下使用。</p>
+<p>Node 是一个基于 Chrome V8 引擎的 JS 运行环境，使得 JS 可以脱离浏览器独立运行，也就是说这是属于后端编程语言，这样前端开发人员除了编写 web 端代码外，在无需学习其他后端语言的情况下也能编写服务器端代码。那么通过 Node 可以实现但又不局限于高性能的 web 服务器、聊天室、爬虫、 客户端应用工具等。</p>
+<p>Nginx 是一个高性能的 HTTP 、反向代理和 IMAP/POP3/SMTP 服务器，当然也还有很多其他功能，比如负载均衡、web 缓存等。具有占有内存少，并发能力强，稳定性高等优势。如果非要说 Nginx 要替代谁的话，也应该是替代 Apache 而非 Node。</p>
+<p>而 Vue 不同于前两个后端的体系，是属于 web 前端的三大框架之一，是一个渐进式的 JS 框架，主要用于搭建前端的 SPA 应用，也就是 web 页面。在开发期间，也是建立在 Node 环境下，通过编译生成浏览器端可以识别的语法。</p>
+<p>了解完三者的区别后，就来看看相关的应用：</p>
+<a id="more"></a>
+
+<p>首先通过 Node 的 Express 框架搭建一个具有 Restful API 的服务器，用于向前端提供数据支持。</p>
+<p>其次将通过 Vue 开发完毕的前端代码打包后，上传至服务器，通过配置 Nginx 来实现 web 访问，大致代码：</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">location</span> / &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attribute">try_files</span> <span class="variable">$uri</span> /usr/http/faychou.github.io/index.html; <span class="comment"># Vue 打包后文件上传目录</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>然后再配置 Node 的反向代理，以解决前端页面的 AJAX 跨域的问题：</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">location</span> / &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attribute">proxy_pass</span> http://localhost:3001; <span class="comment"># 网站后端的 web 服务器地址</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attribute">proxy_set_header</span>   X-Forwarded-For  <span class="variable">$proxy_add_x_forwarded_for</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attribute">fastcgi_param</span> HTTPS <span class="variable">$https</span> if_not_empty;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attribute">proxy_set_header</span> X-Forwarded-Proto https;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>现在应该能有一个比较清楚的认识吧，当然我这里也只是列举了一个其中的功能，更多的可能还需要你再进一步的学习。</p>
+]]></content>
+      <categories>
+        <category>Node</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
+        <tag>Vue</tag>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux 下如何部署 node 应用？</title>
     <url>/Node/linuxdeploynodewithpm2/</url>
     <content><![CDATA[<p>Node 是一个可以在服务器端运行 JavaScript 的环境，作为一个由前端开发步入后端开发，转变为全栈开发的首选后端语言，相信大家都已经非常的熟悉了。现在有很多项目都会选择 Node 来作为后端开发，初出茅庐的兄弟们都想撸起袖子加油干，其中的坑不少，弯弯也不少，但是最终也还是都能解决。在这些问题当中，也许大家都会遇到这么个问题。开发中，可以直接在终端里运行服务器，然后一直挂着。开发完了，再闭关服务器即可。而项目上线的话，一般是部署在 Linux 系统上，并且是一直都能访问的，如果依旧采用开发环境的方式运行项目，就不能关闭终端，或者闭关自己的电脑，不然服务器就不能访问了，很显然不可能一直开机挂着终端吧。</p>
@@ -99,7 +127,7 @@
         <category>Ajax</category>
       </categories>
       <tags>
-        <tag>ajax</tag>
+        <tag>Ajax</tag>
         <tag>跨域</tag>
       </tags>
   </entry>
@@ -308,7 +336,7 @@
   </entry>
   <entry>
     <title>新年粒子动画祝福</title>
-    <url>/HTML5/newyearparticle/</url>
+    <url>/Canvas/newyearparticle/</url>
     <content><![CDATA[<p>首先祝愿所有的小伙伴除夕快乐，有一段时间没有更新了，前两天看到一个大神写的粒子动画，很是有趣，正值春节期间，我就直接拿来稍作修改，做成一个新年祝福动画，效果如下：</p>
 <p><img src="http://ww1.sinaimg.cn/large/6bdc6680gy1gb7wnnykrhg205k046k0o.gif" alt="粒子效果"></p>
 <p><a href="https://github.com/Aaaaaaaty/Blog/blob/master/canvas/canvasParticle/main.js" target="_blank" rel="noopener">原项目地址点击这里查看</a>。</p>
@@ -322,7 +350,7 @@
 <p>最后，祝愿大家新年里所有的美好都“鼠”于你。</p>
 ]]></content>
       <categories>
-        <category>HTML5</category>
+        <category>Canvas</category>
       </categories>
       <tags>
         <tag>Canvas</tag>
@@ -433,7 +461,7 @@
       </categories>
       <tags>
         <tag>Vue</tag>
-        <tag>UI框架</tag>
+        <tag>UI</tag>
       </tags>
   </entry>
   <entry>
@@ -598,8 +626,8 @@
         <category>Ajax</category>
       </categories>
       <tags>
-        <tag>axios</tag>
-        <tag>vue</tag>
+        <tag>Axios</tag>
+        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -680,8 +708,8 @@
       </categories>
       <tags>
         <tag>布局</tag>
-        <tag>vue</tag>
-        <tag>app</tag>
+        <tag>Vue</tag>
+        <tag>App</tag>
       </tags>
   </entry>
   <entry>
@@ -729,7 +757,7 @@
         <category>Ajax</category>
       </categories>
       <tags>
-        <tag>ajax</tag>
+        <tag>Ajax</tag>
         <tag>跨域</tag>
       </tags>
   </entry>
@@ -810,8 +838,8 @@
         <category>Vue</category>
       </categories>
       <tags>
-        <tag>vue</tag>
-        <tag>vue/cli</tag>
+        <tag>Vue</tag>
+        <tag>Vue/cli</tag>
       </tags>
   </entry>
   <entry>
@@ -854,7 +882,7 @@
       </categories>
       <tags>
         <tag>面试题</tag>
-        <tag>js</tag>
+        <tag>JS</tag>
       </tags>
   </entry>
   <entry>
@@ -886,7 +914,7 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>css</tag>
+        <tag>CSS</tag>
         <tag>布局</tag>
       </tags>
   </entry>
